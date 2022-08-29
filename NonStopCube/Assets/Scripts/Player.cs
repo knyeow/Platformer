@@ -75,10 +75,11 @@ public class Player : MonoBehaviour
     }
     private void Walk()
     {
-        anim.SetBool("Walking", horizontal != 0 ? true : false);
         if (Mathf.Abs(horizontal) > 0.01f)
-        rb.velocity = new Vector2(horizontal * moveSpeed, rb.velocity.y);
-        
+        {
+            anim.SetBool("Walking", horizontal != 0 ? true : false);
+            rb.velocity = new Vector2(horizontal * moveSpeed, rb.velocity.y);
+        }
     }
     private void Jump()
     {
