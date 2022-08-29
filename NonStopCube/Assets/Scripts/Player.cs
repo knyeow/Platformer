@@ -75,9 +75,9 @@ public class Player : MonoBehaviour
     }
     private void Walk()
     {
+        anim.SetBool("Walking", horizontal != 0 ? true : false);
         if (Mathf.Abs(horizontal) > 0.01f)
         {
-            anim.SetBool("Walking", horizontal != 0 ? true : false);
             rb.velocity = new Vector2(horizontal * moveSpeed, rb.velocity.y);
         }
     }
@@ -117,6 +117,7 @@ public class Player : MonoBehaviour
     {
         if (damageCooldownTimer >= 0.1f)
         {
+            Debug.Log(damagePower);
             currentHealth -= damagePower;
             damageCooldownTimer = 0;
         }
