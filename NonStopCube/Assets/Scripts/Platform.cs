@@ -8,7 +8,7 @@ public class Platform : MonoBehaviour
     [SerializeField] private float speed;
     [SerializeField] private Transform spawnPoint;
     [SerializeField] private LayerMask wallLayer;
-    
+    [SerializeField] private GameObject Player;
 
     private float lifetimeTimer=999;
 
@@ -31,13 +31,6 @@ public class Platform : MonoBehaviour
        lifetimeTimer += Time.deltaTime;
     }
 
-    private void OnTriggerEnter2D(Collider2D collision)
-    {
-        if (collision.GetComponent<Player>() != null)
-            collision.GetComponent<Player>().TakeDamage(50);
-
-    }
-
     private void Move()
     {
         rb.velocity = new Vector2(Mathf.Sign(transform.localScale.x) * speed, 0);
@@ -52,6 +45,7 @@ public class Platform : MonoBehaviour
             transform.position = spawnPoint.position;     
         }
     }
+
 }
 
 
