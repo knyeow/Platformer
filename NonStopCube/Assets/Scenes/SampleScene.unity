@@ -1509,6 +1509,7 @@ GameObject:
   - component: {fileID: 650456774}
   - component: {fileID: 650456775}
   - component: {fileID: 650456771}
+  - component: {fileID: 650456776}
   m_Layer: 0
   m_Name: GreenBomb
   m_TagString: Untagged
@@ -1529,7 +1530,7 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
+  m_Offset: {x: -0.002380371, y: 0}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -1540,7 +1541,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 1, y: 1}
+  m_Size: {x: 0.74780273, y: 0.74780273}
   m_EdgeRadius: 0
 --- !u!50 &650456770
 Rigidbody2D:
@@ -1637,7 +1638,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 650456768}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 60.32, y: 32.48, z: 0}
+  m_LocalPosition: {x: 66.31, y: 33.25, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1071335467}
@@ -1661,8 +1662,10 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 128
   spawnPoint: {fileID: 1494952621}
+  power: 20
   x: -8
   y: 8
+  ps: {fileID: 650456775}
 --- !u!96 &650456774
 TrailRenderer:
   serializedVersion: 2
@@ -2047,7 +2050,7 @@ ParticleSystem:
   ringBufferLoopRange: {x: 0, y: 1}
   looping: 0
   prewarm: 0
-  playOnAwake: 1
+  playOnAwake: 0
   useUnscaledTime: 0
   autoRandomSeed: 1
   useRigidbodyForVelocity: 1
@@ -6795,6 +6798,32 @@ ParticleSystem:
         m_PostInfinity: 2
         m_RotationOrder: 4
     vectorLabel1_3: W
+--- !u!61 &650456776
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 650456768}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: -0.0011901855, y: -0.0011901855}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0, y: 0}
+    oldSize: {x: 0, y: 0}
+    newSize: {x: 0, y: 0}
+    adaptiveTilingThreshold: 0
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 0.75494385, y: 0.7501831}
+  m_EdgeRadius: 0
 --- !u!1001 &679862029
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -9764,7 +9793,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1494952620}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 60.35, y: 32.53, z: -57.82416}
+  m_LocalPosition: {x: 66.63, y: 32.49, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -9786,7 +9815,7 @@ GameObject:
   - component: {fileID: 1645924013}
   - component: {fileID: 1645924017}
   - component: {fileID: 1645924019}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Cube
   m_TagString: Player
   m_Icon: {fileID: 0}
@@ -9801,7 +9830,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1645924011}
   m_LocalRotation: {x: -0, y: -0, z: 0, w: 1}
-  m_LocalPosition: {x: -1.69, y: -1.13, z: -0.103409246}
+  m_LocalPosition: {x: 28.59, y: 33.64, z: -0.103409246}
   m_LocalScale: {x: 2.5, y: 2.5, z: 2}
   m_Children:
   - {fileID: 123702461}
