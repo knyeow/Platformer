@@ -10,7 +10,7 @@ public class Platform : MonoBehaviour
     [SerializeField] private LayerMask wallLayer;
     [SerializeField] private GameObject Player;
 
-    private float lifetimeTimer=999;
+    private float lifetimeTimer=0;
 
     private Rigidbody2D rb;
     private BoxCollider2D bc;
