@@ -10,7 +10,7 @@ public class PlatformLaser : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Player")&&collision.transform.position.y<transform.position.y)
             collision.GetComponent<Player>().TakeDamage(power);
-        
+  
     }
 
 }

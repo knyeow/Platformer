@@ -2,21 +2,24 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class GreenBomb : MonoBehaviour
+public class GreenBomb : Projectile
 {
     [SerializeField] private float x, y;
-    private Rigidbody2D rb;
 
-    private void Start()
+    protected override void Start()
     {
-        rb = GetComponent<Rigidbody2D>();
+        base.Start();
+        rb.velocity = (new Vector2(x, y));
        
     }
-    private void Update()
+
+    protected override void changeLocation()
     {
-        if (Input.GetKey(KeyCode.V))
-            rb.AddForce(new Vector2(x, y));
-
+        base.changeLocation();
+        rb.velocity = (new Vector2(x, y));
     }
+    
 
-}
+ }
+
+
