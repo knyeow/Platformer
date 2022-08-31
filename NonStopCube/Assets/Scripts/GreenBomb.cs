@@ -9,12 +9,15 @@ public class GreenBomb : Projectile
     [SerializeField] private Animator anim;
 
     private float bombTimer=8;
+    private Vector3 OriginalScale;
 
     protected override void Start()
     {
         base.Start();
 
+        OriginalScale = transform.localScale;      
         rb.velocity = (new Vector2(x, y));
+
     }
 
     protected override void Update()
@@ -34,7 +37,6 @@ public class GreenBomb : Projectile
     {
         if (collision.gameObject.CompareTag("Player") && bombTimer > 5)
         {
-            
             bombTimer = 0;
             StartCoroutine(StickBomb(collision));
         }
@@ -43,6 +45,7 @@ public class GreenBomb : Projectile
 
     private IEnumerator StickBomb(Collider2D collision)
     {
+        
         anim.SetTrigger("Boom");
         lifetimeTimer = 0;
         rb.velocity = Vector2.zero;
@@ -57,6 +60,7 @@ public class GreenBomb : Projectile
         changeLocation();
         rb.simulated = true;
         rb.bodyType = RigidbodyType2D.Dynamic;
+        transform.localScale = OriginalScale;
     }
    
 }

@@ -21,7 +21,7 @@ public class Projectile : MonoBehaviour
     
     protected virtual void Update()
     {
-        RaycastHit2D check = Physics2D.Raycast(transform.position, new Vector2(transform.localScale.x, 0), 1, wallLayer);
+        RaycastHit2D check = Physics2D.Raycast(transform.position, new Vector2(transform.localScale.x, 0), 1f, wallLayer);
 
         if (check || lifetimeTimer >= lifetime)
             changeLocation();
