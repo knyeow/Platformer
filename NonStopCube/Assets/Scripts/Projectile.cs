@@ -5,9 +5,10 @@ using UnityEngine;
 public class Projectile : MonoBehaviour
 {
     [SerializeField] private float lifetime;
-    private float lifetimeTimer=0;
+    protected float lifetimeTimer=0;
     [SerializeField] private LayerMask wallLayer;
     [SerializeField] private Transform spawnPoint;
+    [SerializeField] protected  float power;
 
     protected Rigidbody2D rb;
     private BoxCollider2D bc;
@@ -15,12 +16,13 @@ public class Projectile : MonoBehaviour
     {
         rb = GetComponent<Rigidbody2D>();
         bc = GetComponent<BoxCollider2D>();
+        lifetimeTimer = lifetime;
     }
 
     
     protected virtual void Update()
     {
-        RaycastHit2D check = Physics2D.Raycast(transform.position, new Vector2(transform.localScale.x, 0), 1, wallLayer);
+        RaycastHit2D check = Physics2D.Raycast(transform.position, new Vector2(transform.localScale.x, 0), 1f, wallLayer);
 
         if (check || lifetimeTimer >= lifetime)
             changeLocation();
@@ -32,6 +34,5 @@ public class Projectile : MonoBehaviour
     {
         lifetimeTimer = 0;
         transform.position = spawnPoint.position;
-   
     }
 }
