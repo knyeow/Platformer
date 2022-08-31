@@ -7,6 +7,7 @@ public class GreenBomb : MonoBehaviour
     [SerializeField] private float x, y;
     [SerializeField] private float power;
     [SerializeField] private float lifeTime;
+    [SerializeField] private float delay;
     [SerializeField] private LayerMask wallLayer;
     [SerializeField] private ParticleSystem ps;
     [SerializeField] private Animator anim;
@@ -26,9 +27,8 @@ public class GreenBomb : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
         bc = GetComponent<BoxCollider2D>();
         
-        bombTimer = lifeTime;
-        transform.position = spawnPoint.position;
-        spawnBomb();
+        bombTimer = lifeTime-delay;
+        transform.position = spawnPoint.position;     
     }
 
     private void Update()
@@ -63,6 +63,7 @@ public class GreenBomb : MonoBehaviour
         if(collision.gameObject.CompareTag("Player"))
         collision.GetComponent<Player>().TakeDamage(power);
         transform.position = spawnPoint.position;
+        GetComponent<TrailRenderer>().Clear();
     }
    
     private void spawnBomb()
