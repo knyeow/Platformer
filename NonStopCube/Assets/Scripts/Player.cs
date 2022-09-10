@@ -27,7 +27,7 @@ public class Player : MonoBehaviour
     private float horizontal;
     private float vertical;
 
-    private float currentHealth;
+    public float currentHealth;
     private float damageCooldownTimer;
       
     private bool canDash = true;
