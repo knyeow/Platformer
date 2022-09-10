@@ -32,6 +32,8 @@ public class Player : MonoBehaviour
       
     private bool canDash = true;
     private bool isDashing = false;
+
+    public int deathCount = 0;
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
@@ -39,7 +41,7 @@ public class Player : MonoBehaviour
         tr = GetComponent<TrailRenderer>();
         anim = GetComponent<Animator>();
 
-
+        LoadPlayer();
         currentHealth = maxHealth;
        
     }
@@ -60,6 +62,16 @@ public class Player : MonoBehaviour
         damageCooldownTimer += Time.deltaTime;
 
        
+    }
+
+    public void SavePlayer()
+    {
+        SaveSystem.SavePlayer(this);
+    }
+    public void LoadPlayer()
+    {
+        PlayerData data =SaveSystem.LoadPlayer();
+        deathCount = data.deathCount;
     }
 
     private bool IsGrounded()
@@ -128,6 +140,9 @@ public class Player : MonoBehaviour
         {
             transform.position = activeCheckpoint.position;
             currentHealth = maxHealth;
+            deathCount++;
+            Debug.Log(deathCount);
+            SavePlayer();
         }
     }
     
