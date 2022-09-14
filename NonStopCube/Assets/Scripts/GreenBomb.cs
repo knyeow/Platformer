@@ -37,7 +37,7 @@ public class GreenBomb : MonoBehaviour
             spawnBomb();
 
         bombTimer += Time.deltaTime;
-        
+
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -54,14 +54,15 @@ public class GreenBomb : MonoBehaviour
 
     private IEnumerator StickBomb(Collider2D collision)
     {
-        anim.SetTrigger("Boom");      
-        transform.SetParent(collision.transform);         
+        anim.SetTrigger("Boom");   
+         transform.SetParent(collision.transform);
+        float currentWay = Mathf.Sign(-(collision.transform.position.x-transform.position.x));
         yield return new WaitForSeconds(3);
         transform.SetParent(null);
         ps.Play();   
         yield return new WaitForSeconds(0.1f);
         if(collision.gameObject.CompareTag("Player"))
-        collision.GetComponent<Player>().TakeDamage(power);
+        collision.GetComponent<Player>().TakeDamage(power,currentWay);
         transform.position = spawnPoint.position;
         GetComponent<TrailRenderer>().Clear();
     }

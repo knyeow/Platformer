@@ -29,7 +29,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 6080121303308399421}
-  m_RootOrder: 1
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &7895715270079264601
 MonoBehaviour:
@@ -49,7 +49,7 @@ MonoBehaviour:
   m_Color: {r: 1, g: 0, b: 0, a: 1}
   m_Intensity: 0.24
   m_LightVolumeOpacity: 0
-  m_ApplyToSortingLayers: 00000000c57f9fe5
+  m_ApplyToSortingLayers: 00000000c57f9fe54fd744cf2faff3bd
   m_LightCookieSprite: {fileID: 0}
   m_UseNormalMap: 0
   m_LightOrder: 0
@@ -103,7 +103,6 @@ Transform:
   m_LocalPosition: {x: 0.459, y: 0, z: 0}
   m_LocalScale: {x: -1, y: 1, z: 1}
   m_Children:
-  - {fileID: 6080121303720041263}
   - {fileID: 4872925776282943926}
   m_Father: {fileID: 6080121304592200258}
   m_RootOrder: 0
@@ -146,7 +145,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -442531899
-  m_SortingLayer: 3
+  m_SortingLayer: 4
   m_SortingOrder: 0
   m_Sprite: {fileID: 6154482952187920464, guid: 14ad56979d0c64a49bdb4a7ebfc50cb3, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -193,7 +192,7 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0.021058906}
+  m_Offset: {x: 0.00028564036, y: 0}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -204,7 +203,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.5029676, y: 0.087068416}
+  m_Size: {x: 0.51953506, y: 0.11866227}
   m_EdgeRadius: 0
 --- !u!114 &6080121303308399420
 MonoBehaviour:
@@ -225,77 +224,6 @@ MonoBehaviour:
   spawnPoint: {fileID: 6080121304563336392}
   power: 0
   speed: 3
---- !u!1 &6080121303720041256
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 6080121303720041263}
-  - component: {fileID: 6080121303720041261}
-  - component: {fileID: 6080121303720041262}
-  m_Layer: 6
-  m_Name: TriggerCollider
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &6080121303720041263
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6080121303720041256}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.5, y: 0.15, z: 1}
-  m_Children: []
-  m_Father: {fileID: 6080121303308399421}
-  m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!61 &6080121303720041261
-BoxCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6080121303720041256}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: 0.00060015917, y: -0.19803096}
-  m_SpriteTilingProperty:
-    border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0, y: 0}
-    oldSize: {x: 0, y: 0}
-    newSize: {x: 0, y: 0}
-    adaptiveTilingThreshold: 0
-    drawMode: 0
-    adaptiveTiling: 0
-  m_AutoTiling: 0
-  serializedVersion: 2
-  m_Size: {x: 1.0548693, y: 0.37628898}
-  m_EdgeRadius: 0
---- !u!114 &6080121303720041262
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6080121303720041256}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fedabc0b372dedf4ab7177ba90daef24, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  power: 50
 --- !u!1 &6080121304563336393
 GameObject:
   m_ObjectHideFlags: 0
@@ -397,7 +325,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -442531899
-  m_SortingLayer: 3
+  m_SortingLayer: 4
   m_SortingOrder: 0
   m_Sprite: {fileID: -3384591752856995705, guid: 14ad56979d0c64a49bdb4a7ebfc50cb3, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}

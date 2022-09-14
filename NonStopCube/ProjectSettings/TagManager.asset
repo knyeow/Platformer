@@ -47,6 +47,9 @@ TagManager:
   - name: BackGround
     uniqueID: 3186863919
     locked: 0
+  - name: BackGround-Front
+    uniqueID: 3477395279
+    locked: 0
   - name: Level
     uniqueID: 3852435397
     locked: 0

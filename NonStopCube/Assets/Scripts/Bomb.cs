@@ -38,7 +38,7 @@ public class Bomb : MonoBehaviour
     {
         if (isDetected)
         {
-            player.GetComponent<Player>().TakeDamage(20);
+            player.GetComponent<Player>().TakeDamage(20,1);
             
         }
 

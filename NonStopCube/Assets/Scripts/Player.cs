@@ -6,6 +6,7 @@ public class Player : MonoBehaviour
 {
 
     [SerializeField] private LayerMask groundLayer;
+    [SerializeField] private Transform feetPos;
     [SerializeField] private float maxHealth;
     [SerializeField] private float moveSpeed;
     [SerializeField] private float jumpForce;
@@ -13,8 +14,6 @@ public class Player : MonoBehaviour
     [SerializeField] private float dashPower;
     [SerializeField] private float dashTime;
     [SerializeField] private float dashCooldown;
-
-    [SerializeField] private ParticleSystem ps;
 
     private Rigidbody2D rb;
     private BoxCollider2D bc;
@@ -33,6 +32,8 @@ public class Player : MonoBehaviour
     private bool canDash = true;
     private bool isDashing = false;
 
+    private bool isDamageing = false;
+
     public int deathCount = 0;
     void Start()
     {
@@ -47,7 +48,9 @@ public class Player : MonoBehaviour
     }
      void Update()
     {
-        
+
+        Die();
+        if (isDamageing) return;
         if (isDashing) return;
 
         horizontal = Input.GetAxis("Horizontal");
@@ -57,10 +60,11 @@ public class Player : MonoBehaviour
         Walk();
         Jump();
         Dashing();
-        Die();
+       
 
         damageCooldownTimer += Time.deltaTime;
 
+        Debug.Log(IsGrounded());
        
     }
 
@@ -76,8 +80,10 @@ public class Player : MonoBehaviour
 
     private bool IsGrounded()
     {
-        RaycastHit2D groundCheck = Physics2D.BoxCast(transform.GetChild(1).position, new Vector2(bc.bounds.size.x,0.1f), 0f, Vector2.down, 0.1f, groundLayer);
-        return groundCheck;
+        if (Physics2D.BoxCast(feetPos.position, new Vector2(bc.bounds.size.x, 0.1f), 0f, Vector2.down, 0.1f, groundLayer))
+            return true;
+        else
+            return false;
     }
 
     private void XScale()
@@ -96,11 +102,12 @@ public class Player : MonoBehaviour
     private void Jump()
     {
 
-        if (Input.GetKey(KeyCode.Space)&&IsGrounded())
+        if (Input.GetKey(KeyCode.Space) && IsGrounded())
         {
             rb.velocity = new Vector2(rb.velocity.x, jumpForce);
             anim.SetTrigger("Jump");
         }
+        
     }
 
     private void Dashing()
@@ -125,11 +132,22 @@ public class Player : MonoBehaviour
         canDash = true;
     }
 
-    public void TakeDamage(float damagePower)
+    private IEnumerator DamageEffect(float way)
+    {
+        isDamageing = true;
+        rb.velocity = new Vector2(-7*way*Mathf.Sign(transform.localScale.x),7);
+        yield return new WaitForSeconds(0.3f);
+        rb.velocity = new Vector2(0, rb.velocity.y);
+        yield return new WaitForSeconds(0.1f);
+        isDamageing = false;
+
+    }
+
+    public void TakeDamage(float damagePower, float way)
     {
         if (damageCooldownTimer >= 0.1f)
-        {
-            Debug.Log(damagePower);
+        {     
+            StartCoroutine(DamageEffect(way));
             currentHealth -= damagePower;
             damageCooldownTimer = 0;
         }
@@ -139,9 +157,9 @@ public class Player : MonoBehaviour
         if (currentHealth <= 0)
         {
             transform.position = activeCheckpoint.position;
+            rb.velocity = Vector2.zero;
             currentHealth = maxHealth;
-            deathCount++;
-            Debug.Log(deathCount);
+            deathCount++;         
             SavePlayer();
         }
     }
