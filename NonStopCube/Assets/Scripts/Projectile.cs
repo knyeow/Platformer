@@ -20,7 +20,7 @@ public class Projectile : MonoBehaviour
     }
 
     
-    protected virtual void Update()
+    protected virtual void FixedUpdate()
     {
         RaycastHit2D check = Physics2D.Raycast(transform.position, new Vector2(transform.localScale.x, 0), 1f, wallLayer);
 

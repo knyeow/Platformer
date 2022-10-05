@@ -9,9 +9,9 @@ public class Platform : Projectile
     [SerializeField] private float speed;
  
 
-    protected override void Update()
+    protected override void FixedUpdate()
     {
-        base.Update();
+        base.FixedUpdate();
         Move();
 
     }

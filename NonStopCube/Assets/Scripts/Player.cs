@@ -46,7 +46,7 @@ public class Player : MonoBehaviour
         currentHealth = maxHealth;
        
     }
-     void Update()
+     private void FixedUpdate()
     {
 
         Die();
