@@ -1,2 +1,2 @@
 # CubeGame
-Learning Unity
+a platformer cube game (No name yet)
