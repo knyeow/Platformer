@@ -20,7 +20,7 @@ public class GreenBomb : MonoBehaviour
     private BoxCollider2D bc;
 
     private float bombTimer=0;
-    private Vector3 OriginalScale;
+    
 
     private  void Start()
     {
@@ -31,12 +31,13 @@ public class GreenBomb : MonoBehaviour
         transform.position = spawnPoint.position;     
     }
 
-    private void Update()
+    private void FixedUpdate()
     {
         if (bombTimer >= lifeTime)
-            spawnBomb();
+            SpawnBomb();
 
         bombTimer += Time.deltaTime;
+
 
     }
 
@@ -55,26 +56,26 @@ public class GreenBomb : MonoBehaviour
     private IEnumerator StickBomb(Collider2D collision)
     {
         anim.SetTrigger("Boom");   
-         transform.SetParent(collision.transform);
-        float currentWay = Mathf.Sign(-(collision.transform.position.x-transform.position.x));
+         transform.SetParent(collision.transform);    
         yield return new WaitForSeconds(3);
         transform.SetParent(null);
-        ps.Play();   
-        yield return new WaitForSeconds(0.1f);
+        ps.Play();     
         if(collision.gameObject.CompareTag("Player"))
-        collision.GetComponent<Player>().TakeDamage(power,currentWay);
+        collision.GetComponent<Player>().TakeDamage(power,0);
         transform.position = spawnPoint.position;
         GetComponent<TrailRenderer>().Clear();
+
     }
+
    
-    private void spawnBomb()
+    private void SpawnBomb()
     {
         bombTimer = 0;
         GetComponent<TrailRenderer>().Clear();
         rb.simulated = true;
         rb.velocity = new Vector2(x, y);
     }
-    
+  
 }
 
 

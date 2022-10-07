@@ -14,7 +14,7 @@ TagManager:
   - Ground
   - Wall
   - Player
-  - 
+  - Hat
   - 
   - 
   - 
@@ -56,6 +56,6 @@ TagManager:
   - name: Player
     uniqueID: 2969707873
     locked: 0
-  - name: New Layer
+  - name: UI
     uniqueID: 2137712533
     locked: 0
