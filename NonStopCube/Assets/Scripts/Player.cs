@@ -15,10 +15,13 @@ public class Player : MonoBehaviour
     [SerializeField] private float dashTime;
     [SerializeField] private float dashCooldown;
 
+    
+
     private Rigidbody2D rb;
     private BoxCollider2D bc;
     private TrailRenderer tr;
     private Animator anim;
+    
 
     public Transform activeCheckpoint;
 
@@ -41,6 +44,7 @@ public class Player : MonoBehaviour
         bc = GetComponent<BoxCollider2D>();
         tr = GetComponent<TrailRenderer>();
         anim = GetComponent<Animator>();
+        
 
         LoadPlayer();
         currentHealth = maxHealth;
@@ -60,12 +64,9 @@ public class Player : MonoBehaviour
         Walk();
         Jump();
         Dashing();
-       
 
         damageCooldownTimer += Time.deltaTime;
 
-        Debug.Log(IsGrounded());
-       
     }
 
     public void SavePlayer()
@@ -164,4 +165,6 @@ public class Player : MonoBehaviour
         }
     }
     
+    
+
 }
