@@ -7,6 +7,7 @@ public class Player : MonoBehaviour
 
     [SerializeField] private LayerMask groundLayer;
     [SerializeField] private Transform feetPos;
+    [SerializeField] private GameObject hat;
     [SerializeField] private float maxHealth;
     [SerializeField] private float moveSpeed;
     [SerializeField] private float jumpForce;
@@ -21,6 +22,8 @@ public class Player : MonoBehaviour
     private BoxCollider2D bc;
     private TrailRenderer tr;
     private Animator anim;
+
+    private Hat hatHat;
     
 
     public Transform activeCheckpoint;
@@ -44,7 +47,8 @@ public class Player : MonoBehaviour
         bc = GetComponent<BoxCollider2D>();
         tr = GetComponent<TrailRenderer>();
         anim = GetComponent<Animator>();
-        
+
+        hatHat = hat.GetComponent<Hat>();
 
         LoadPlayer();
         currentHealth = maxHealth;
@@ -151,6 +155,11 @@ public class Player : MonoBehaviour
             StartCoroutine(DamageEffect(way));
             currentHealth -= damagePower;
             damageCooldownTimer = 0;
+            
+            transform.localScale = transform.localScale / 1.25f;
+
+            if (!hatHat.isThrow)
+                hat.transform.localScale = transform.localScale * 1.25f;
         }
     }
     private void Die()
@@ -158,7 +167,17 @@ public class Player : MonoBehaviour
         if (currentHealth <= 0)
         {
             transform.position = activeCheckpoint.position;
-            rb.velocity = Vector2.zero;
+            transform.localScale = Vector3.one * 2.5f;
+
+            if (hatHat.isThrow)
+            {
+                hat.transform.localScale = Vector3.one * 2.5f;
+                hat.GetComponent<Hat>().TakeHatBack();
+            }
+            else
+                hat.transform.localScale = Vector3.one;
+
+             rb.velocity = Vector2.zero;
             currentHealth = maxHealth;
             deathCount++;         
             SavePlayer();

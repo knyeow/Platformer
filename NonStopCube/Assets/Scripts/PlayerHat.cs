@@ -18,6 +18,7 @@ public class PlayerHat : MonoBehaviour
     private Rigidbody2D rb;
     private Hat hatHat;
 
+
     [SerializeField] private Transform pointsPos;
     [SerializeField] private GameObject point;
     private GameObject[] points;
@@ -45,7 +46,7 @@ public class PlayerHat : MonoBehaviour
 
 
         
-        if (Input.GetMouseButton(0) && !hatHat.isThrow)
+        if (Input.GetMouseButton(0) && !hatHat.isThrow)            //hat aim
         {
             pointsPos.transform.rotation = Quaternion.Euler(0, 0, rotZ);
             int pointsNumber = Mathf.Min((Mathf.Abs((int)ThrowPower().x) + Mathf.Abs((int)ThrowPower().y)),15);
@@ -74,7 +75,7 @@ public class PlayerHat : MonoBehaviour
             }
             
         }
-        if (Input.GetMouseButtonUp(0))
+        if (Input.GetMouseButtonUp(0))              //throw hat
         {
             if (!hatHat.isThrow)
                 hatHat.ThrowHat(ThrowPower());
@@ -86,7 +87,7 @@ public class PlayerHat : MonoBehaviour
             currentPointNumber = 0;
            
         }
-        if (Input.GetKey(KeyCode.Q) && hatHat.isThrow)
+        if (Input.GetKey(KeyCode.Q) && hatHat.isThrow)   //take hat back
         {
             hatHat.TakeHatBack();
             
@@ -94,7 +95,7 @@ public class PlayerHat : MonoBehaviour
 
         
 
-        if (Input.GetKey(KeyCode.E) && hatHat.isThrow)       //teleport
+        if (Input.GetKey(KeyCode.E) && hatHat.Teleportable())       //teleport
         {
             Teleport();
             hatHat.isThrow = false;
@@ -108,7 +109,7 @@ public class PlayerHat : MonoBehaviour
 
     private void Teleport()
     {
-        transform.position = hat.transform.position;
+        transform.position = hat.transform.position+new Vector3(0,+0.3f+0);
         rb.velocity = Vector2.zero;
     }
 
