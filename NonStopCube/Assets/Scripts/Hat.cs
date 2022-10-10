@@ -70,7 +70,7 @@ public class Hat : MonoBehaviour
     {
         RaycastHit2D land = Physics2D.BoxCast(bc.bounds.center, bc.bounds.size, 0, Vector2.down, 0.2f, groundLayer);
 
-        if (rb.velocity.x < 0.1f &&land)
+        if (land&&Mathf.Abs(rb.velocity.y) <0.1f)
             return true;
         else
             return false;

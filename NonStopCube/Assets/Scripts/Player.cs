@@ -34,7 +34,10 @@ public class Player : MonoBehaviour
 
     public float currentHealth;
     private float damageCooldownTimer;
-      
+
+    private float jumpTime=2;
+    bool secondJump = false;
+
     private bool canDash = true;
     private bool isDashing = false;
 
@@ -66,8 +69,13 @@ public class Player : MonoBehaviour
 
         XScale();
         Walk();
-        Jump();
+        Jump();  
         Dashing();
+
+        if (IsGrounded())
+            jumpTime = 2;
+
+        Debug.Log(jumpTime);
 
         damageCooldownTimer += Time.deltaTime;
 
@@ -107,12 +115,30 @@ public class Player : MonoBehaviour
     private void Jump()
     {
 
+
+        //if (Input.GetKey(KeyCode.Space))
+        //{
+        //    if (IsGrounded())
+        //    {
+        //        rb.AddForce(new Vector2(0, jumpForce));
+        //        anim.SetTrigger("Jump");
+        //        secondJump = true;
+        //    }
+        //}
+        //if (secondJump&& Input.GetKeyDown(KeyCode.Space))
+        //{
+
+        //    rb.AddForce(new Vector2(0, jumpForce));
+        //    anim.SetTrigger("Jump");
+        //    secondJump = false;
+        //}
+
         if (Input.GetKey(KeyCode.Space) && IsGrounded())
         {
             rb.velocity = new Vector2(rb.velocity.x, jumpForce);
             anim.SetTrigger("Jump");
         }
-        
+
     }
 
     private void Dashing()
@@ -156,10 +182,16 @@ public class Player : MonoBehaviour
             currentHealth -= damagePower;
             damageCooldownTimer = 0;
             
-            transform.localScale = transform.localScale / 1.25f;
+            transform.localScale = transform.localScale / 2f;
+            rb.collisionDetectionMode = CollisionDetectionMode2D.Continuous;
 
             if (!hatHat.isThrow)
-                hat.transform.localScale = transform.localScale * 1.25f;
+                        hat.transform.localScale = Vector3.one * 2f;
+
+            if(currentHealth ==1)
+            tr.widthMultiplier = tr.widthMultiplier / 4f;
+
+             
         }
     }
     private void Die()
@@ -167,15 +199,14 @@ public class Player : MonoBehaviour
         if (currentHealth <= 0)
         {
             transform.position = activeCheckpoint.position;
+            rb.collisionDetectionMode = CollisionDetectionMode2D.Discrete;
             transform.localScale = Vector3.one * 2.5f;
+            tr.widthMultiplier = tr.widthMultiplier * 4f;
 
-            if (hatHat.isThrow)
-            {
-                hat.transform.localScale = Vector3.one * 2.5f;
-                hat.GetComponent<Hat>().TakeHatBack();
-            }
-            else
+            if (!hatHat.isThrow)
                 hat.transform.localScale = Vector3.one;
+            else
+                hatHat.TakeHatBack();
 
              rb.velocity = Vector2.zero;
             currentHealth = maxHealth;

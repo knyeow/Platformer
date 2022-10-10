@@ -67,7 +67,7 @@ public class PlayerHat : MonoBehaviour
                     currentPointNumber++;
                     }
                 }
-            Debug.Log(currentPointNumber);
+            
             for (int i = 0;i < currentPointNumber-pointsNumber; i++)
             {   
                 Destroy(points[currentPointNumber - i-1]);
