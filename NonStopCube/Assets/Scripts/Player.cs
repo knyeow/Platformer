@@ -44,6 +44,7 @@ public class Player : MonoBehaviour
     private bool isDamageing = false;
 
     public int deathCount = 0;
+
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
@@ -52,6 +53,8 @@ public class Player : MonoBehaviour
         anim = GetComponent<Animator>();
 
         hatHat = hat.GetComponent<Hat>();
+
+        rb.collisionDetectionMode = CollisionDetectionMode2D.Continuous;
 
         LoadPlayer();
         currentHealth = maxHealth;
@@ -107,7 +110,7 @@ public class Player : MonoBehaviour
     private void Walk()
     {
         anim.SetBool("Walking", horizontal != 0 ? true : false);
-        if (Mathf.Abs(horizontal) > 0.01f)
+        if (Mathf.Abs(horizontal) > 0.05f)
         {
             rb.velocity = new Vector2(horizontal * moveSpeed, rb.velocity.y);
         }
@@ -183,7 +186,7 @@ public class Player : MonoBehaviour
             damageCooldownTimer = 0;
             
             transform.localScale = transform.localScale / 2f;
-            rb.collisionDetectionMode = CollisionDetectionMode2D.Continuous;
+            
 
             if (!hatHat.isThrow)
                         hat.transform.localScale = Vector3.one * 2f;
@@ -199,7 +202,7 @@ public class Player : MonoBehaviour
         if (currentHealth <= 0)
         {
             transform.position = activeCheckpoint.position;
-            rb.collisionDetectionMode = CollisionDetectionMode2D.Discrete;
+            
             transform.localScale = Vector3.one * 2.5f;
             tr.widthMultiplier = tr.widthMultiplier * 4f;
 
