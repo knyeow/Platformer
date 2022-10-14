@@ -78,7 +78,7 @@ public class Player : MonoBehaviour
         if (IsGrounded())
             jumpTime = 2;
 
-        Debug.Log(jumpTime);
+        
 
         damageCooldownTimer += Time.deltaTime;
 
@@ -185,14 +185,6 @@ public class Player : MonoBehaviour
             currentHealth -= damagePower;
             damageCooldownTimer = 0;
             
-            transform.localScale = transform.localScale / 2f;
-            
-
-            if (!hatHat.isThrow)
-                        hat.transform.localScale = Vector3.one * 2f;
-
-            if(currentHealth ==1)
-            tr.widthMultiplier = tr.widthMultiplier / 4f;
 
              
         }
@@ -203,12 +195,6 @@ public class Player : MonoBehaviour
         {
             transform.position = activeCheckpoint.position;
             
-            transform.localScale = Vector3.one * 2.5f;
-            tr.widthMultiplier = tr.widthMultiplier * 4f;
-
-            if (!hatHat.isThrow)
-                hat.transform.localScale = Vector3.one;
-            else
                 hatHat.TakeHatBack();
 
              rb.velocity = Vector2.zero;
