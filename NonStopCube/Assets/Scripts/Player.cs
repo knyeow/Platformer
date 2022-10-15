@@ -35,7 +35,6 @@ public class Player : MonoBehaviour
     public float currentHealth;
     private float damageCooldownTimer;
 
-    private float jumpTime=2;
     bool secondJump = false;
 
     private bool canDash = true;
@@ -75,10 +74,6 @@ public class Player : MonoBehaviour
         Jump();  
         Dashing();
 
-        if (IsGrounded())
-            jumpTime = 2;
-
-        
 
         damageCooldownTimer += Time.deltaTime;
 
@@ -118,23 +113,6 @@ public class Player : MonoBehaviour
     private void Jump()
     {
 
-
-        //if (Input.GetKey(KeyCode.Space))
-        //{
-        //    if (IsGrounded())
-        //    {
-        //        rb.AddForce(new Vector2(0, jumpForce));
-        //        anim.SetTrigger("Jump");
-        //        secondJump = true;
-        //    }
-        //}
-        //if (secondJump&& Input.GetKeyDown(KeyCode.Space))
-        //{
-
-        //    rb.AddForce(new Vector2(0, jumpForce));
-        //    anim.SetTrigger("Jump");
-        //    secondJump = false;
-        //}
 
         if (Input.GetKey(KeyCode.Space) && IsGrounded())
         {

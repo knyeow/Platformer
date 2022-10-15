@@ -43,19 +43,19 @@ public class StickBomb : MonoBehaviour
 
 
     private IEnumerator Stick(Collision2D collision)
-    {
+    {   
         rb.simulated = false;
         anim.SetBool("boom",true);
         transform.SetParent(collision.transform);
         yield return new WaitForSeconds(3);
         ps.Play();
 
-        transform.SetParent(null);
+        
 
         if (collision.gameObject.CompareTag("Player"))
-            collision.gameObject.GetComponent<Player>().TakeDamage(1, 1);
+            collision.gameObject.GetComponent<Player>().TakeDamage(1, 0);
 
-        
+        transform.SetParent(null);
         anim.SetBool("boom", false);
         transform.position = startPosition;
         tr.Clear();
