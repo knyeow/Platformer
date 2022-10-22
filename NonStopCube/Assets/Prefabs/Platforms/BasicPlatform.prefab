@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 4502677388673329155}
   - component: {fileID: 4502677388673329152}
   - component: {fileID: 4502677388673329159}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: BasicPlatform
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -148,8 +148,6 @@ MonoBehaviour:
   wallLayer:
     serializedVersion: 2
     m_Bits: 128
-  speed: 5
-  direction: 1
   noPlayer:
     serializedVersion: 2
     m_Bits: 759

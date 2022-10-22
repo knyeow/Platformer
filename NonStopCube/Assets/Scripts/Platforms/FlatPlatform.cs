@@ -7,7 +7,6 @@ public class FlatPlatform : MonoBehaviour
     [SerializeField] private LayerMask noPlayer;
     [SerializeField] private LayerMask allLayers;
 
-    private float waitTime;
     private PlatformEffector2D platform;
 
     private void Start()
@@ -17,10 +16,7 @@ public class FlatPlatform : MonoBehaviour
 
     private void Update()
     {
-        if (Input.GetKeyUp(KeyCode.S))
-        {
-            waitTime = -0.1f;
-        }
+
 
 
 

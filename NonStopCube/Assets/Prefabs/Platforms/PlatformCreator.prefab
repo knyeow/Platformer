@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 6072162578029322875}
   - component: {fileID: 6072162578029322874}
   - component: {fileID: 6072162578029322853}
+  - component: {fileID: 526470166152623730}
   m_Layer: 0
   m_Name: PlatformCreator
   m_TagString: Untagged
@@ -72,7 +73,7 @@ SpriteRenderer:
   m_SortingLayerID: -442531899
   m_SortingLayer: 4
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: ca714fddafb2ab746bb3ed6167ca63e3, type: 3}
+  m_Sprite: {fileID: -1805811634351265435, guid: dfa772d1eb400c644892928184d0bf7c, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -96,5 +97,26 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   platform: {fileID: 4502677388673329153, guid: c4c3939d63f885746a4287bb221354eb, type: 3}
+  speed: 7.5
   direction: 1
   coolDown: 5
+  isActive: 1
+--- !u!95 &526470166152623730
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6072162578029322852}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: b9e7ec8f339fad846a7701ce152858c7, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0

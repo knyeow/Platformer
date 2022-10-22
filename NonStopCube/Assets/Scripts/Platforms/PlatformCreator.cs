@@ -12,13 +12,20 @@ public class PlatformCreator : MonoBehaviour
     [SerializeField] private bool isActive = true;
     private float coolDownTimer;
 
+    private Animator anim;
 
+    private void Start()
+    {
+        coolDownTimer = coolDown; 
+        anim = GetComponent<Animator>();
+
+    }
 
     private void Update()
     {
         if (coolDownTimer >= coolDown &&isActive)
         {
-            SpawnPlatform();
+            anim.SetBool("spawn", true);
             coolDownTimer = 0;
         }
 
@@ -29,6 +36,7 @@ public class PlatformCreator : MonoBehaviour
     {
        _platform = Instantiate(platform, transform.position, Quaternion.identity,transform);
         _platform.GetComponent<MovingPlatform>().setPlatform(direction,speed);
+        anim.SetBool("spawn", false);
     }
 
     public void setIsActive()

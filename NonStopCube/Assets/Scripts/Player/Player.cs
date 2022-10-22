@@ -16,7 +16,7 @@ public class Player : MonoBehaviour
     [SerializeField] private float dashTime;
     [SerializeField] private float dashCooldown;
 
-    
+    [SerializeField] private PhysicsMaterial2D noFriction;
 
     private Rigidbody2D rb;
     private BoxCollider2D bc;
@@ -73,6 +73,11 @@ public class Player : MonoBehaviour
         Jump();  
         Dashing();
 
+
+        if (!IsGrounded())
+            rb.sharedMaterial = noFriction;
+        else
+            rb.sharedMaterial = null;
 
         damageCooldownTimer += Time.deltaTime;
 
