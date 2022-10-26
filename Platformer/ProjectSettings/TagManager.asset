@@ -1,0 +1,62 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!78 &1
+TagManager:
+  serializedVersion: 2
+  tags:
+  - Hat
+  layers:
+  - Default
+  - TransparentFX
+  - Ignore Raycast
+  - 
+  - Water
+  - UI
+  - Ground
+  - Wall
+  - Player
+  - Hat
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  m_SortingLayers:
+  - name: Default
+    uniqueID: 0
+    locked: 0
+  - name: Background-Back
+    uniqueID: 2662688763
+    locked: 0
+  - name: BackGround
+    uniqueID: 3186863919
+    locked: 0
+  - name: BackGround-Front
+    uniqueID: 3477395279
+    locked: 0
+  - name: Level
+    uniqueID: 3852435397
+    locked: 0
+  - name: Player
+    uniqueID: 2969707873
+    locked: 0
+  - name: UI
+    uniqueID: 2137712533
+    locked: 0
