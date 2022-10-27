@@ -13,7 +13,7 @@ public class Spikes : MonoBehaviour
 
         if (collision.gameObject.CompareTag("Player"))
         {
-            collision.GetComponent<Player>().TakeDamage(power,1f);
+            collision.GetComponent<Player>().Die();
 
         }
      

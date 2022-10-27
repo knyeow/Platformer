@@ -7,7 +7,6 @@ public class MovingFlatPlatform : MovingPlatform
     [SerializeField] private LayerMask noPlayer;
     [SerializeField] private LayerMask allLayers;
 
-    private float waitTime;
     private PlatformEffector2D platform;
 
     private void Start()
@@ -18,15 +17,6 @@ public class MovingFlatPlatform : MovingPlatform
     protected override void Update()
     {
         base.Update();
-
-
-        if (Input.GetKeyUp(KeyCode.S))
-        {
-            waitTime = -0.1f;
-        }
-
-
-
         if (Input.GetKey(KeyCode.S))
         {
             StartCoroutine(Fall());

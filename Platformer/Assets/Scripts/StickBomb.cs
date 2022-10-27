@@ -44,7 +44,7 @@ public class StickBomb : MonoBehaviour
     {
         ps.Play();
         if (collision.gameObject.CompareTag("Player"))
-            collision.gameObject.GetComponent<Player>().TakeDamage(1, 0);
+            collision.gameObject.GetComponent<Player>().Die();
         
         transform.position = startPosition;
         tr.Clear();

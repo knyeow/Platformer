@@ -61,8 +61,6 @@ public class Player : MonoBehaviour
      private void FixedUpdate()
     {
 
-        Die();
-        if (isDamageing) return;
         if (isDashing) return;
 
         horizontal = Input.GetAxis("Horizontal");
@@ -70,8 +68,12 @@ public class Player : MonoBehaviour
 
         XScale();
         Walk();
-        Jump();  
-        Dashing();
+
+        if (Input.GetKey(KeyCode.Space) && IsGrounded())
+            Jump();
+
+        if (Input.GetKey(KeyCode.LeftShift) && canDash)
+            StartCoroutine(Dash());
 
 
         if (!IsGrounded())
@@ -79,7 +81,6 @@ public class Player : MonoBehaviour
         else
             rb.sharedMaterial = null;
 
-        damageCooldownTimer += Time.deltaTime;
 
     }
 
@@ -116,20 +117,9 @@ public class Player : MonoBehaviour
     }
     private void Jump()
     {
-
-
-        if (Input.GetKey(KeyCode.Space) && IsGrounded())
-        {
             rb.velocity = new Vector2(rb.velocity.x, jumpForce);
             anim.SetTrigger("Jump");
-        }
 
-    }
-
-    private void Dashing()
-    {
-        if (Input.GetKey(KeyCode.LeftShift) && canDash)
-            StartCoroutine(Dash());
     }
     private IEnumerator Dash()
     {
@@ -148,41 +138,13 @@ public class Player : MonoBehaviour
         canDash = true;
     }
 
-    private IEnumerator DamageEffect(float way)
+    public void Die()
     {
-        isDamageing = true;
-        rb.velocity = new Vector2(-7*way*Mathf.Sign(transform.localScale.x),7);
-        yield return new WaitForSeconds(0.3f);
-        rb.velocity = new Vector2(0, rb.velocity.y);
-        yield return new WaitForSeconds(0.1f);
-        isDamageing = false;
-
-    }
-
-    public void TakeDamage(float damagePower, float way)
-    {
-        if (damageCooldownTimer >= 0.1f)
-        {     
-            StartCoroutine(DamageEffect(way));
-            currentHealth -= damagePower;
-            damageCooldownTimer = 0;
-
-             
-        }
-    }
-    private void Die()
-    {
-        if (currentHealth <= 0)
-        {
-            transform.position = activeCheckpoint.position;
-            
-                hatHat.TakeHatBack();
-
-             rb.velocity = Vector2.zero;
-            currentHealth = maxHealth;
-            deathCount++;         
-            SavePlayer();
-        }
+        transform.position = activeCheckpoint.position;
+        hatHat.TakeHatBack();
+        rb.velocity = Vector2.zero;       
+        deathCount++;
+        SavePlayer();
     }
     
     
