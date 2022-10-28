@@ -10,8 +10,6 @@ public class PlayerHat : MonoBehaviour
     [SerializeField] private float powerFactor;
 
     
-    [SerializeField] private GameObject lookAtMouse;
-
     private Vector3 mousePos;
     private Camera mainCamera;
 
@@ -130,16 +128,7 @@ public class PlayerHat : MonoBehaviour
 
 
     }
-    private void PlankSize()                //not currently using" its changing planks size according to mouseposisition
-    {
-        mousePos = mainCamera.ScreenToWorldPoint(Input.mousePosition);
-        Vector2 rotation = mousePos - playerHatPos.position;
-        float rotZ = Mathf.Atan2(rotation.y, rotation.x) * Mathf.Rad2Deg;
 
-        lookAtMouse.transform.rotation = Quaternion.Euler(0, 0, rotZ);
-        lookAtMouse.transform.localScale = new Vector2(Mathf.Min(Mathf.Sqrt(Mathf.Pow(rotation.x, 2) + Mathf.Pow(rotation.y, 2)) / 3, 3), lookAtMouse.transform.localScale.y);
-        lookAtMouse.transform.localPosition = new Vector2(lookAtMouse.transform.localScale.x / 2, lookAtMouse.transform.localPosition.y);
-    }
 }
 
 

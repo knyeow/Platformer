@@ -30,7 +30,7 @@ public class FlatPlatform : MonoBehaviour
     private IEnumerator Fall()
     {
         platform.colliderMask = noPlayer;
-        yield return new WaitForSeconds(0.2f);
+        yield return new WaitForSeconds(0.35f);
         platform.colliderMask = allLayers;
     }
 

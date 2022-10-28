@@ -1,9 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
 public class Player : MonoBehaviour
 {
+    private GameMaster gm;
 
     [SerializeField] private LayerMask groundLayer;
     [SerializeField] private Transform feetPos;
@@ -39,12 +39,12 @@ public class Player : MonoBehaviour
     private bool canDash = true;
     private bool isDashing = false;
 
-    private bool isDamageing = false;
 
     public int deathCount = 0;
 
     void Start()
     {
+        gm = GameObject.FindGameObjectWithTag("GM").GetComponent<GameMaster>();
         rb = GetComponent<Rigidbody2D>();
         bc = GetComponent<BoxCollider2D>();
         tr = GetComponent<TrailRenderer>();
@@ -75,14 +75,22 @@ public class Player : MonoBehaviour
         if (Input.GetKey(KeyCode.LeftShift) && canDash)
             StartCoroutine(Dash());
 
+        
 
         if (!IsGrounded())
             rb.sharedMaterial = noFriction;
         else
             rb.sharedMaterial = null;
 
+            anim.SetBool("jump", !IsGrounded());
 
     }
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.R))
+            Die();
+    }
+
 
     public void SavePlayer()
     {
@@ -109,30 +117,35 @@ public class Player : MonoBehaviour
     }
     private void Walk()
     {
-        anim.SetBool("Walking", horizontal != 0 ? true : false);
-        if (Mathf.Abs(horizontal) > 0.05f)
+        anim.SetBool("Walking", Mathf.Abs(horizontal) > 0.05f);
+        if (Mathf.Abs(horizontal) > 0.1f)
         {
             rb.velocity = new Vector2(horizontal * moveSpeed, rb.velocity.y);
         }
     }
     private void Jump()
     {
-            rb.velocity = new Vector2(rb.velocity.x, jumpForce);
-            anim.SetTrigger("Jump");
-
+          rb.velocity = new Vector2(rb.velocity.x, jumpForce);
     }
     private IEnumerator Dash()
     {
         isDashing = true;
+        anim.SetBool("isDashing", true);
         canDash = false;
+        Vector2 originalCollider = new Vector2(bc.offset.y, bc.size.y);
         float originalGravity = rb.gravityScale;
         rb.gravityScale = 0;
+        bc.offset = new Vector2(bc.offset.x, -0.1700975f);
+        bc.size = new Vector2(bc.size.x, 0.3998051f);
         tr.emitting = true;
         rb.velocity = new Vector2(Mathf.Sign(transform.localScale.x)*dashPower,0);
         yield return new WaitForSeconds(dashTime);
         rb.velocity = Vector2.zero;
         rb.gravityScale = originalGravity;
-        isDashing=false;
+        bc.offset = new Vector2(bc.offset.x, originalCollider.x);
+        bc.size = new Vector2(bc.size.x, originalCollider.y);
+        isDashing =false;
+        anim.SetBool("isDashing", false);
         tr.emitting = false;
         yield return new WaitForSeconds(dashCooldown);
         canDash = true;
@@ -140,13 +153,19 @@ public class Player : MonoBehaviour
 
     public void Die()
     {
-        transform.position = activeCheckpoint.position;
-        hatHat.TakeHatBack();
-        rb.velocity = Vector2.zero;       
-        deathCount++;
-        SavePlayer();
+        StartCoroutine(DieRoutine());
     }
     
-    
+    public IEnumerator DieRoutine()
+    {
+        anim.SetTrigger("splitDie");
+        yield return new WaitForSeconds(1.5f);
+        transform.position = gm.GetCheckpoint();
+        hatHat.TakeHatBack();
+        rb.velocity = Vector2.zero;
+        deathCount++;
+        SavePlayer();
+
+    }
 
 }
