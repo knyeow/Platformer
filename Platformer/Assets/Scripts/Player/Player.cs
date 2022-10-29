@@ -38,6 +38,7 @@ public class Player : MonoBehaviour
 
     private bool canDash = true;
     private bool isDashing = false;
+    private bool isDying = false;
 
 
     public int deathCount = 0;
@@ -60,8 +61,9 @@ public class Player : MonoBehaviour
     }
      private void FixedUpdate()
     {
-
+        if (isDying) return;
         if (isDashing) return;
+        
 
         horizontal = Input.GetAxis("Horizontal");
         vertical = Input.GetAxis("Vertical");
@@ -158,13 +160,18 @@ public class Player : MonoBehaviour
     
     public IEnumerator DieRoutine()
     {
-        anim.SetTrigger("splitDie");
+        rb.simulated = false;
+        isDying = true;
+        anim.SetBool("splitDie", true);
         yield return new WaitForSeconds(1.5f);
         transform.position = gm.GetCheckpoint();
         hatHat.TakeHatBack();
         rb.velocity = Vector2.zero;
         deathCount++;
         SavePlayer();
+        isDying=false;
+        anim.SetBool("splitDie", false);
+        rb.simulated = true;
 
     }
 
