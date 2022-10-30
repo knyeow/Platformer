@@ -34,7 +34,7 @@ public class PlatformCreator : MonoBehaviour
 
     private void SpawnPlatform()
     {
-       _platform = Instantiate(platform, transform.position, Quaternion.identity,transform);
+       _platform = Instantiate(platform, transform.position,Quaternion.identity,transform);
         _platform.GetComponent<MovingPlatform>().setPlatform(direction,speed);
         anim.SetBool("spawn", false);
     }

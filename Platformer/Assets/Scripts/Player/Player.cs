@@ -38,7 +38,9 @@ public class Player : MonoBehaviour
 
     private bool canDash = true;
     private bool isDashing = false;
-    private bool isDying = false;
+
+
+    public static bool isDying = false;
 
 
     public int deathCount = 0;
@@ -155,6 +157,7 @@ public class Player : MonoBehaviour
 
     public void Die()
     {
+        if(!isDying)
         StartCoroutine(DieRoutine());
     }
     

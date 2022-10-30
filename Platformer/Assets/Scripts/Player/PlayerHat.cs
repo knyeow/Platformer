@@ -40,7 +40,8 @@ public class PlayerHat : MonoBehaviour
         float rotZ = Mathf.Atan2(rotation.y, rotation.x) * Mathf.Rad2Deg;
 
 
-
+        if (Player.isDying)
+            return;
 
 
         
@@ -107,7 +108,7 @@ public class PlayerHat : MonoBehaviour
 
     private void Teleport()
     {
-        transform.position = hat.transform.position+new Vector3(0,+0.3f+0);
+        transform.position = hat.transform.position+new Vector3(0,+0.5f+0);
         rb.velocity = Vector2.zero;
     }
 

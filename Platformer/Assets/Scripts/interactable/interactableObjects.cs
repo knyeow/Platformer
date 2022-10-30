@@ -8,7 +8,7 @@ public class interactableObjects : MonoBehaviour
     [SerializeField] private float coolDown =0.2f;
     private float coolDownTimer =0;
 
-    private void Update()
+    protected virtual void Update()
     {
         if (Trigger() && SpecificContidion() && coolDownTimer >= coolDown )
         {

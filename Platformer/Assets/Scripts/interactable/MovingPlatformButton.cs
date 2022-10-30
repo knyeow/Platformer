@@ -8,25 +8,26 @@ public class MovingPlatformButton : interactableObjects
 
     private bool isOpen;
 
-    
 
+    protected override void Update()
+    {
+        base.Update();
+
+        if(Player.isDying && isOpen)
+            Close();
+
+
+    }
 
 
     protected override void Intention()
     {
-        if (!isOpen)
-        {
-            transform.rotation = Quaternion.Euler(0f, 0f, 35);
-            platformCreator.GetComponent<PlatformCreator>().setIsActive();
-            isOpen = true;
-        }else if (isOpen)
-        {
-            transform.rotation = Quaternion.Euler(0f, 0f, -35);
-            platformCreator.GetComponent<PlatformCreator>().setIsActive();
-            isOpen = false;
-        }
-
+        if(isOpen)
+            Close();
+        else
+            Open();
     }
+    
 
     protected override bool Trigger()
     {
@@ -39,4 +40,17 @@ public class MovingPlatformButton : interactableObjects
 
     }
 
+    private void Open()
+    {
+        transform.rotation = Quaternion.Euler(0f, 0f, 35);
+        platformCreator.GetComponent<PlatformCreator>().setIsActive();
+        isOpen = true;
+    }
+    private void Close()
+    {
+        transform.rotation = Quaternion.Euler(0f, 0f, -35);
+        platformCreator.GetComponent<PlatformCreator>().setIsActive();
+        isOpen = false;
+
+    }
 }

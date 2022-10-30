@@ -22,6 +22,7 @@ public class GameMaster : MonoBehaviour
 
     public void SetCheckpoint(Vector2 checkpointPosition)
     {
+        if(!Player.isDying)
         lastCheckpoint = checkpointPosition;
     }
     public Vector2 GetCheckpoint()
