@@ -28,7 +28,7 @@ public class MovingFlatPlatform : MovingPlatform
     private IEnumerator Fall()
     {
         platform.colliderMask = noPlayer;
-        yield return new WaitForSeconds(0.35f);
+        yield return new WaitForSeconds(0.5f);
         platform.colliderMask = allLayers;
     }
 
