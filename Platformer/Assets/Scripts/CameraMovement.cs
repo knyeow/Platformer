@@ -6,6 +6,8 @@ public class CameraMovement : MonoBehaviour
 {
     [SerializeField] private Transform player;
     [SerializeField] private float lerp;
+
+
    
     // Update is called once per frame
     void Update()
@@ -16,6 +18,9 @@ public class CameraMovement : MonoBehaviour
     {
         Vector3 smoothPoint = Vector3.Lerp(transform.position, new Vector3(player.transform.position.x,player.transform.position.y,-10), lerp*Time.deltaTime);
         transform.position = smoothPoint;
+
+
+        
     }
 
 }

@@ -8,6 +8,12 @@ public class interactableObjects : MonoBehaviour
     [SerializeField] private float coolDown =0.2f;
     private float coolDownTimer =0;
 
+    protected GameMaster gm;
+    private void Start()
+    {
+        gm = GameObject.FindGameObjectWithTag("GM").GetComponent<GameMaster>();
+    }
+
     protected virtual void Update()
     {
         if (Trigger() && SpecificContidion() && coolDownTimer >= coolDown )

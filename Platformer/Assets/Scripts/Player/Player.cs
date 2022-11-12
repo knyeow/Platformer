@@ -40,10 +40,7 @@ public class Player : MonoBehaviour
     private bool isDashing = false;
 
 
-    public static bool isDying = false;
 
-
-    public int deathCount = 0;
 
     void Start()
     {
@@ -57,13 +54,14 @@ public class Player : MonoBehaviour
 
         rb.collisionDetectionMode = CollisionDetectionMode2D.Continuous;
 
-        LoadPlayer();
         currentHealth = maxHealth;
-       
+
+        transform.position = gm.GetCheckpoint();
+
     }
      private void FixedUpdate()
     {
-        if (isDying) return;
+        if (gm.isPlayerStop()) return;
         if (isDashing) return;
         
 
@@ -95,17 +93,6 @@ public class Player : MonoBehaviour
             Die();
     }
 
-
-    public void SavePlayer()
-    {
-        SaveSystem.SavePlayer(this);
-    }
-    public void LoadPlayer()
-    {
-        PlayerData data =SaveSystem.LoadPlayer();
-        deathCount = data.deathCount;
-    }
-
     private bool IsGrounded()
     {
         if (Physics2D.BoxCast(feetPos.position, new Vector2(bc.bounds.size.x, 0.1f), 0f, Vector2.down, 0.1f, groundLayer))
@@ -122,10 +109,9 @@ public class Player : MonoBehaviour
     private void Walk()
     {
         anim.SetBool("Walking", Mathf.Abs(horizontal) > 0.05f);
-        if (Mathf.Abs(horizontal) > 0.1f)
-        {
-            rb.velocity = new Vector2(horizontal * moveSpeed, rb.velocity.y);
-        }
+        if(horizontal != 0)
+        rb.velocity = new Vector2(horizontal * moveSpeed, rb.velocity.y);
+
     }
     private void Jump()
     {
@@ -157,25 +143,25 @@ public class Player : MonoBehaviour
 
     public void Die()
     {
-        if(!isDying)
+        if(!gm.isDying)
         StartCoroutine(DieRoutine());
     }
     
     public IEnumerator DieRoutine()
     {
         rb.simulated = false;
-        isDying = true;
+        gm.isDying = true;
         anim.SetBool("splitDie", true);
         yield return new WaitForSeconds(1.5f);
         transform.position = gm.GetCheckpoint();
         hatHat.TakeHatBack();
         rb.velocity = Vector2.zero;
-        deathCount++;
-        SavePlayer();
-        isDying=false;
+        gm.isDying=false;
         anim.SetBool("splitDie", false);
         rb.simulated = true;
 
     }
+
+
 
 }

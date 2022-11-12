@@ -6,6 +6,7 @@ public class MovingFlatPlatform : MovingPlatform
 {
     [SerializeField] private LayerMask noPlayer;
     [SerializeField] private LayerMask allLayers;
+    [SerializeField] private LayerMask playerLayer;
 
     private PlatformEffector2D platform;
 
@@ -31,6 +32,5 @@ public class MovingFlatPlatform : MovingPlatform
         yield return new WaitForSeconds(0.5f);
         platform.colliderMask = allLayers;
     }
-
 
 }

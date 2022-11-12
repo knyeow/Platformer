@@ -6,6 +6,8 @@ TagManager:
   tags:
   - Hat
   - GM
+  - GS
+  - Checkpoint
   layers:
   - Default
   - TransparentFX
@@ -52,8 +54,20 @@ TagManager:
   - name: BackGround-Front
     uniqueID: 3477395279
     locked: 0
+  - name: BackGround-front-front
+    uniqueID: 2563982561
+    locked: 0
+  - name: BackGround-front-front-front
+    uniqueID: 2344044233
+    locked: 0
+  - name: LevelNonCollide
+    uniqueID: 1573860753
+    locked: 0
   - name: Level
     uniqueID: 3852435397
+    locked: 0
+  - name: LevelTile
+    uniqueID: 2991974721
     locked: 0
   - name: Player
     uniqueID: 2969707873

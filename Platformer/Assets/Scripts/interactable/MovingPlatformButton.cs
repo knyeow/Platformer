@@ -13,7 +13,7 @@ public class MovingPlatformButton : interactableObjects
     {
         base.Update();
 
-        if(Player.isDying && isOpen)
+        if(gm.isDying && isOpen)
             Close();
 
 

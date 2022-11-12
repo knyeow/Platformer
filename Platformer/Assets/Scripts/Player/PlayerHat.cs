@@ -22,9 +22,11 @@ public class PlayerHat : MonoBehaviour
     private GameObject[] points;
     int currentPointNumber = 0;
 
+    private GameMaster gm;
 
     void Start()
     {
+        gm = GameObject.FindGameObjectWithTag("GM").GetComponent<GameMaster>();
         rb = GetComponent<Rigidbody2D>();
         hatHat = hat.GetComponent<Hat>();
         mainCamera = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<Camera>();
@@ -40,11 +42,10 @@ public class PlayerHat : MonoBehaviour
         float rotZ = Mathf.Atan2(rotation.y, rotation.x) * Mathf.Rad2Deg;
 
 
-        if (Player.isDying)
-            return;
+        if (gm.isPlayerStop()) return;
 
 
-        
+
         if (Input.GetMouseButton(0) && !hatHat.isThrow)            //hat aim
         {
             pointsPos.transform.rotation = Quaternion.Euler(0, 0, rotZ);

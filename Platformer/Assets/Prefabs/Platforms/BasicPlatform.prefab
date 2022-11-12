@@ -154,6 +154,9 @@ MonoBehaviour:
   allLayers:
     serializedVersion: 2
     m_Bits: 4294967295
+  playerLayer:
+    serializedVersion: 2
+    m_Bits: 256
 --- !u!251 &4502677388673329159
 PlatformEffector2D:
   m_ObjectHideFlags: 0
