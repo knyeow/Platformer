@@ -6,7 +6,6 @@ public class StopGameUI : MonoBehaviour
 {
     private GameMaster gm;
 
-    [SerializeField] private GameObject checkpointUI;
 
     public void OpenUI()
     {
@@ -18,7 +17,6 @@ public class StopGameUI : MonoBehaviour
     {
         GameObject.FindGameObjectWithTag("GM").GetComponent<GameMaster>().onMenu = false;
         Time.timeScale = 1;
-        checkpointUI.SetActive(false);
         gameObject.SetActive(false);
     }
     public void CloseApp()
@@ -27,9 +25,5 @@ public class StopGameUI : MonoBehaviour
     }
 
 
-    public void OpenCheckpointUI()
-    {
-        checkpointUI.SetActive(true);
-    }
 
 }

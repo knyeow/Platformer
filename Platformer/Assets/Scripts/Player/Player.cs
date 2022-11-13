@@ -156,7 +156,7 @@ public class Player : MonoBehaviour
         rb.simulated = false;
         gm.isDying = true;
         anim.SetBool("splitDie", true);
-        yield return new WaitForSeconds(1.5f);
+        yield return new WaitForSeconds(1f);
         transform.position = gm.GetCheckpoint();
         hatHat.TakeHatBack();
         rb.velocity = Vector2.zero;
