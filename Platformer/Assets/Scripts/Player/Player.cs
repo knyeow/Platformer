@@ -40,7 +40,7 @@ public class Player : MonoBehaviour
     private bool isDashing = false;
 
 
-
+    [SerializeField] private AudioSource jumpSoundEffect;
 
     void Start()
     {
@@ -116,6 +116,7 @@ public class Player : MonoBehaviour
     private void Jump()
     {
           rb.velocity = new Vector2(rb.velocity.x, jumpForce);
+          jumpSoundEffect.Play();
     }
     private IEnumerator Dash()
     {
