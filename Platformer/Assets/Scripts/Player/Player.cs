@@ -84,13 +84,14 @@ public class Player : MonoBehaviour
         else
             rb.sharedMaterial = null;
 
-            anim.SetBool("jump", !IsGrounded());
-
+       
     }
     private void Update()
     {
         if (Input.GetKeyDown(KeyCode.R))
             Die();
+
+        anim.SetBool("fall", IsGrounded());
     }
 
     private bool IsGrounded()
@@ -115,8 +116,10 @@ public class Player : MonoBehaviour
     }
     private void Jump()
     {
-          rb.velocity = new Vector2(rb.velocity.x, jumpForce);
-          jumpSoundEffect.Play();
+        rb.velocity = new Vector2(rb.velocity.x, jumpForce);
+        anim.SetTrigger("jump");
+        jumpSoundEffect.Play();
+
     }
     private IEnumerator Dash()
     {

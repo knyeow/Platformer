@@ -5,7 +5,7 @@ using UnityEngine;
 public class MovingPlatformButton : interactableObjects
 {
     [SerializeField] private GameObject platformCreator;
-
+    [SerializeField] private GameObject ButtonInfo;
     private bool isOpen;
 
 
@@ -15,6 +15,11 @@ public class MovingPlatformButton : interactableObjects
 
         if(gm.isDying && isOpen)
             Close();
+
+        if (SpecificContidion())
+            ButtonInfo.SetActive(true);
+        else
+            ButtonInfo.SetActive(false);
 
 
     }
@@ -35,7 +40,7 @@ public class MovingPlatformButton : interactableObjects
     }
     protected override bool SpecificContidion()
     {
-        Collider2D isClose = Physics2D.OverlapCircle(transform.position, 2f, playerLayer);
+        Collider2D isClose = Physics2D.OverlapCircle(transform.position, 2.5f, playerLayer);
         return isClose;
 
     }

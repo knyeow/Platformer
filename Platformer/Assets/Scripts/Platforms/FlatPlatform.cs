@@ -17,9 +17,6 @@ public class FlatPlatform : MonoBehaviour
     private void Update()
     {
 
-
-
-
         if (Input.GetKey(KeyCode.S)){
                 StartCoroutine(Fall());
         }
