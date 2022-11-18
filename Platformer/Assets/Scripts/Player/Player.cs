@@ -5,6 +5,8 @@ public class Player : MonoBehaviour
 {
     private GameMaster gm;
 
+
+
     [SerializeField] private LayerMask groundLayer;
     [SerializeField] private Transform feetPos;
     [SerializeField] private GameObject hat;
@@ -23,6 +25,7 @@ public class Player : MonoBehaviour
     private TrailRenderer tr;
     private Animator anim;
 
+    private PlayerHat pH;
     private Hat hatHat;
     
 
@@ -40,10 +43,20 @@ public class Player : MonoBehaviour
     private bool isDashing = false;
 
 
+    [SerializeField] private TrailRenderer[] footTr;
+
+
     [SerializeField] private AudioSource jumpSoundEffect;
+
+
+    private void Awake()
+    {
+       
+    }
 
     void Start()
     {
+        pH = GetComponent<PlayerHat>();
         gm = GameObject.FindGameObjectWithTag("GM").GetComponent<GameMaster>();
         rb = GetComponent<Rigidbody2D>();
         bc = GetComponent<BoxCollider2D>();
@@ -55,8 +68,9 @@ public class Player : MonoBehaviour
         rb.collisionDetectionMode = CollisionDetectionMode2D.Continuous;
 
         currentHealth = maxHealth;
-
+       
         transform.position = gm.GetCheckpoint();
+        clearTrails();
 
     }
      private void FixedUpdate()
@@ -152,12 +166,14 @@ public class Player : MonoBehaviour
     }
     
     public IEnumerator DieRoutine()
-    {
+    {        
         rb.simulated = false;
         gm.isDying = true;
+        pH.DeletePoints();
         anim.SetBool("splitDie", true);
-        yield return new WaitForSeconds(1f);
+        yield return new WaitForSeconds(.75f);
         transform.position = gm.GetCheckpoint();
+        clearTrails();
         hatHat.TakeHatBack();
         rb.velocity = Vector2.zero;
         gm.isDying=false;
@@ -166,6 +182,11 @@ public class Player : MonoBehaviour
 
     }
 
+    public void clearTrails()
+    {
+        footTr[0].Clear();
+        footTr[1].Clear();
 
+    }
 
 }

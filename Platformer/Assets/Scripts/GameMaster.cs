@@ -24,8 +24,6 @@ public class GameMaster : MonoBehaviour
         }
         else
             Destroy(gameObject);
-
-        
     }
     private void Start()
     {

@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class PlayerHat : MonoBehaviour
 {
+    [SerializeField] private Player player;
+
     [SerializeField] private GameObject hat;
     [SerializeField] private Transform playerHatPos;
     
@@ -26,6 +28,7 @@ public class PlayerHat : MonoBehaviour
 
     void Start()
     {
+        player = GetComponent<Player>();
         gm = GameObject.FindGameObjectWithTag("GM").GetComponent<GameMaster>();
         rb = GetComponent<Rigidbody2D>();
         hatHat = hat.GetComponent<Hat>();
@@ -111,6 +114,7 @@ public class PlayerHat : MonoBehaviour
     {
         transform.position = hat.transform.position+new Vector3(0,+0.5f+0);
         rb.velocity = Vector2.zero;
+        player.clearTrails();
     }
 
 
@@ -129,6 +133,15 @@ public class PlayerHat : MonoBehaviour
         return throwPower;
 
 
+    }
+
+    public void DeletePoints()
+    {
+        for (int i = 0; i < points.Length; i++)
+        {
+            Destroy(points[i]);
+        }
+        currentPointNumber = 0;
     }
 
 }
