@@ -8,10 +8,21 @@ public class MovingPlatformButton : interactableObjects
     [SerializeField] private GameObject ButtonInfo;
     private bool isOpen;
 
+    [SerializeField] private Sprite[] Sprites;
+    private SpriteRenderer sr;
+
+    protected override void Start()
+    {
+        base.Start();
+        sr = GetComponent<SpriteRenderer>();
+
+    }
 
     protected override void Update()
     {
         base.Update();
+
+        
 
         if(gm.isDying && isOpen)
             Close();
@@ -47,13 +58,13 @@ public class MovingPlatformButton : interactableObjects
 
     private void Open()
     {
-        transform.rotation = Quaternion.Euler(0f, 0f, 35);
+        sr.sprite = Sprites[1];
         platformCreator.GetComponent<PlatformCreator>().setIsActive();
         isOpen = true;
     }
     private void Close()
     {
-        transform.rotation = Quaternion.Euler(0f, 0f, -35);
+        sr.sprite = Sprites[0];
         platformCreator.GetComponent<PlatformCreator>().setIsActive();
         isOpen = false;
 

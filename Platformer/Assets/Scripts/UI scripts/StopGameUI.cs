@@ -4,6 +4,9 @@ using UnityEngine;
 
 public class StopGameUI : MonoBehaviour
 {
+    [SerializeField] private GameObject controls;
+
+
     private GameMaster gm;
 
 
@@ -17,6 +20,7 @@ public class StopGameUI : MonoBehaviour
     {
         GameObject.FindGameObjectWithTag("GM").GetComponent<GameMaster>().onMenu = false;
         Time.timeScale = 1;
+        controls.SetActive(false);
         gameObject.SetActive(false);
     }
     public void CloseApp()
@@ -24,6 +28,12 @@ public class StopGameUI : MonoBehaviour
         Application.Quit();       
     }
 
-
+    public void Controls()
+    {
+        if(controls.activeInHierarchy)
+            controls.SetActive(false);
+        else
+            controls.SetActive(true);
+    }
 
 }

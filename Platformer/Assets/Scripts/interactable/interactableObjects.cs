@@ -9,7 +9,7 @@ public class interactableObjects : MonoBehaviour
     private float coolDownTimer =0;
 
     protected GameMaster gm;
-    private void Start()
+    protected virtual void Start()
     {
         gm = GameObject.FindGameObjectWithTag("GM").GetComponent<GameMaster>();
     }

@@ -11,8 +11,9 @@ public class ContrableDoorButton : interactableObjects
     private Rigidbody2D rb;
     private BoxCollider2D bc;
 
-    private void Start()
+    protected override void Start()
     {
+        base.Start();
         rb = GetComponent<Rigidbody2D>();
         bc = GetComponent<BoxCollider2D>();
 
