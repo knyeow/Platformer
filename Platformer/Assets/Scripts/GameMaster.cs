@@ -2,18 +2,18 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+
 public class GameMaster : MonoBehaviour
 {
     private static GameMaster instance;
 
     [SerializeField] private Vector2 lastCheckpoint;
-    [SerializeField] private int currentCheckpointNum;
 
 
     [SerializeField] public GameObject[] checkPoints;
 
     public bool isDying = false;
-    public bool onMenu = false;
+    public bool onMenu = true;
 
     void Awake()
     {
@@ -34,8 +34,12 @@ public class GameMaster : MonoBehaviour
             checkPoints[GameObject.FindGameObjectsWithTag("Checkpoint")[i].GetComponent<CheckPoint>().checkpointNum]
                 = GameObject.FindGameObjectsWithTag("Checkpoint")[i];
         }
+
+
         LoadPlayer();
     }
+
+
 
     public void SetCheckpoint(Vector2 checkpointPosition)
     {
@@ -58,7 +62,9 @@ public class GameMaster : MonoBehaviour
     }
     public void LoadPlayer()
     {
+        
         GameData data = SaveSystem.LoadPlayer();
+        if(data!=null)
         SetCheckpoint(data.GetCheckpoint());
     }
 

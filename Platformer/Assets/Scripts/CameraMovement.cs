@@ -7,8 +7,11 @@ public class CameraMovement : MonoBehaviour
     [SerializeField] private Transform player;
     [SerializeField] private float lerp;
 
+    private void Start()
+    {
+        transform.position = GameObject.FindGameObjectWithTag("GM").GetComponent<GameMaster>().GetCheckpoint();
+    }
 
-   
     // Update is called once per frame
     void Update()
     {
