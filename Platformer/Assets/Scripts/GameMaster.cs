@@ -12,6 +12,10 @@ public class GameMaster : MonoBehaviour
 
     [SerializeField] public GameObject[] checkPoints;
 
+    [SerializeField] private Finish finish;
+
+    public float levelTimer =0;
+
     public bool isDying = false;
     public bool onMenu = true;
 
@@ -46,6 +50,8 @@ public class GameMaster : MonoBehaviour
         if (!isDying)
         {
             lastCheckpoint = checkpointPosition;
+            levelTimer += finish.levelTimer;
+            finish.levelTimer = 0;
             SavePlayer();
         }
 
@@ -64,8 +70,11 @@ public class GameMaster : MonoBehaviour
     {
         
         GameData data = SaveSystem.LoadPlayer();
-        if(data!=null)
-        SetCheckpoint(data.GetCheckpoint());
+        if (data != null)
+        {
+            SetCheckpoint(data.GetCheckpoint());
+            levelTimer = data.levelTimer;
+        }
     }
 
 
@@ -73,5 +82,11 @@ public class GameMaster : MonoBehaviour
     {
         return isDying || onMenu;
 
+    }
+
+    private void OnApplicationQuit()
+    {
+        levelTimer += finish.levelTimer;
+        SavePlayer();
     }
 }

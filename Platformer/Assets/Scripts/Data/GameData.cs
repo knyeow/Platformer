@@ -8,10 +8,13 @@ public class GameData
     private float checkPointPosX;
     private float checkPointPosY;
 
+    public float levelTimer =0;
+
     public GameData (GameMaster gameMaster)
     {
         checkPointPosX = gameMaster.GetCheckpoint().x;
         checkPointPosY = gameMaster.GetCheckpoint().y;
+        levelTimer = gameMaster.levelTimer;
     }
 
     public Vector2 GetCheckpoint()
