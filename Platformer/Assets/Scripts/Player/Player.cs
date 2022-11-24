@@ -35,8 +35,8 @@ public class Player : MonoBehaviour
     private float horizontal;
     private float vertical;
 
-    public float currentHealth;
-    private float damageCooldownTimer;
+    private float coyoteTime = 0.15f;
+    private float coyoteTimer =0;
 
 
     private bool canDash = true;
@@ -67,7 +67,6 @@ public class Player : MonoBehaviour
 
         rb.collisionDetectionMode = CollisionDetectionMode2D.Continuous;
 
-        currentHealth = maxHealth;
        
         transform.position = gm.GetCheckpoint();
         clearTrails();
@@ -76,6 +75,7 @@ public class Player : MonoBehaviour
      private void FixedUpdate()
     {
         if (gm.isPlayerStop()) return;
+
         if (isDashing) return;
         
 
@@ -85,8 +85,7 @@ public class Player : MonoBehaviour
         XScale();
         Walk();
 
-        if (Input.GetKey(KeyCode.Space) && IsGrounded())
-            Jump();
+       
 
         if (Input.GetKey(KeyCode.LeftShift) && canDash)
             StartCoroutine(Dash());
@@ -99,11 +98,22 @@ public class Player : MonoBehaviour
             rb.sharedMaterial = null;
 
        
+
     }
     private void Update()
     {
         if (Input.GetKeyDown(KeyCode.R))
             Die();
+
+        if (Input.GetKey(KeyCode.Space) && coyoteTimer > 0)
+            Jump();
+
+        if (IsGrounded())
+            coyoteTimer = coyoteTime;
+        else
+            coyoteTimer -= Time.deltaTime;
+
+        Debug.Log(coyoteTimer);
 
         anim.SetBool("fall", IsGrounded());
     }
@@ -114,8 +124,14 @@ public class Player : MonoBehaviour
             return true;
         else
             return false;
+
+
     }
 
+    IEnumerator NotGrounded()
+    {
+        yield return new WaitForSeconds(0.1f);
+    }
     private void XScale()
     {
         if (horizontal != 0)
@@ -131,6 +147,7 @@ public class Player : MonoBehaviour
     private void Jump()
     {
         rb.velocity = new Vector2(rb.velocity.x, jumpForce);
+        coyoteTimer = 0;
         anim.SetTrigger("jump");
         jumpSoundEffect.Play();
 
