@@ -29,7 +29,6 @@ public class Player : MonoBehaviour
     private Hat hatHat;
     
 
-    public Transform activeCheckpoint;
 
 
     private float horizontal;
@@ -115,7 +114,7 @@ public class Player : MonoBehaviour
         else
             coyoteTimer -= Time.deltaTime;
 
-        Debug.Log(coyoteTimer);
+        
 
         anim.SetBool("fall", IsGrounded());
     }

@@ -6,7 +6,6 @@ public class Finish : MonoBehaviour
 {
     [SerializeField] private GameObject finishUI;
 
-    [SerializeField] private Transform finishCheckpoint;
 
     private bool hasFinished;
     public float levelTimer;
@@ -35,10 +34,9 @@ public class Finish : MonoBehaviour
 
     private void FinishLevel()
     {
-        hasFinished = true;
-        gm.SetCheckpoint(finishCheckpoint.position);  //save
+        gm.levelTimer += levelTimer;
+        hasFinished = true;  
         finishUI.SetActive(true);
         gm.onMenu = true;
-        Debug.Log(gm.levelTimer);
     }
 }

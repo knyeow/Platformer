@@ -5,9 +5,12 @@ using UnityEngine;
 
 public class GameMaster : MonoBehaviour
 {
-    private static GameMaster instance;
+
 
     [SerializeField] private Vector2 lastCheckpoint;
+
+    public int level=1;
+    public int lastCheckpointNum = 0;
 
 
     [SerializeField] public GameObject[] checkPoints;
@@ -21,35 +24,30 @@ public class GameMaster : MonoBehaviour
 
     void Awake()
     {
-        if (instance == null)
-        {
-            instance = this;
-            DontDestroyOnLoad(instance);
-        }
-        else
-            Destroy(gameObject);
-    }
-    private void Start()
-    {
-        checkPoints = new GameObject[GameObject.FindGameObjectsWithTag("Checkpoint").Length];
-        for (int i = 0; i < GameObject.FindGameObjectsWithTag("Checkpoint").Length; i++)
-        {
-
-            checkPoints[GameObject.FindGameObjectsWithTag("Checkpoint")[i].GetComponent<CheckPoint>().checkpointNum]
-                = GameObject.FindGameObjectsWithTag("Checkpoint")[i];
-        }
 
 
         LoadPlayer();
+
+        GameObject[] _checkpoints = GameObject.FindGameObjectsWithTag("Checkpoint");
+        checkPoints = new GameObject[_checkpoints.Length];
+        for (int i = 0; i < GameObject.FindGameObjectsWithTag("Checkpoint").Length; i++)
+        {
+            checkPoints[_checkpoints[i].GetComponent<CheckPoint>().checkpointNum] = _checkpoints[i];
+        }
+    }
+    private void Start()
+    {
+        
+
+
+       
     }
 
-
-
-    public void SetCheckpoint(Vector2 checkpointPosition)
+    public void SetCheckpoint(int checkpointNum)
     {
         if (!isDying)
         {
-            lastCheckpoint = checkpointPosition;
+            lastCheckpointNum = checkpointNum;
             levelTimer += finish.levelTimer;
             finish.levelTimer = 0;
             SavePlayer();
@@ -58,9 +56,13 @@ public class GameMaster : MonoBehaviour
     }
     public Vector2 GetCheckpoint()
     {
-        return lastCheckpoint;
+        return checkPoints[lastCheckpointNum].transform.position;
     }
 
+    public int GetCheckpointNum()
+    {
+        return lastCheckpointNum;
+    }
 
     public void SavePlayer()
     {
@@ -72,7 +74,8 @@ public class GameMaster : MonoBehaviour
         GameData data = SaveSystem.LoadPlayer();
         if (data != null)
         {
-            SetCheckpoint(data.GetCheckpoint());
+            level = data.level;
+            lastCheckpointNum = data.checkpointNum;
             levelTimer = data.levelTimer;
         }
     }

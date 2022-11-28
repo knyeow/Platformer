@@ -8,6 +8,7 @@ using System.IO;
 
 public class MainMenu : MonoBehaviour
 {
+    private GameMaster gm;
 
     [SerializeField] private GameObject loadGameText;
 
@@ -18,8 +19,8 @@ public class MainMenu : MonoBehaviour
 
     private void Start()
     {
+        gm = GameObject.FindGameObjectWithTag("GM").GetComponent<GameMaster>();
         anim = GetComponent<Animator>();
-
         savePath = Application.persistentDataPath + "/player.data";
 
         if (File.Exists(savePath))
@@ -40,7 +41,7 @@ public class MainMenu : MonoBehaviour
 
     public void LoadScene()
     {
-        StartCoroutine(LoadSceneAsync(1));
+        StartCoroutine(LoadSceneAsync(gm.level));
     }
 
     IEnumerator LoadSceneAsync(int sceneID)
@@ -65,7 +66,7 @@ public class MainMenu : MonoBehaviour
     {
         if (File.Exists(savePath))
             File.Delete(savePath);
-
+        gm.level = 1;
         anim.SetBool("play", true);
 
     }

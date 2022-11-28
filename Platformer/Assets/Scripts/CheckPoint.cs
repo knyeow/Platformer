@@ -16,17 +16,27 @@ public class CheckPoint : MonoBehaviour
         gm = GameObject.FindGameObjectWithTag("GM").GetComponent<GameMaster>();
     }
 
+    //private void OnTriggerEnter2D(Collider2D collision)
+    //{
+    //    if (collision.gameObject.CompareTag("Player") && (gm.GetCheckpoint() != new Vector2(transform.position.x, transform.position.y)))
+    //    {
+    //        gm.SetCheckpoint(this.transform.position);
+    //        ps.Play();
+    //        anim.SetBool("check", true);
+            
+    //    }
+    //}
+
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.gameObject.CompareTag("Player") && (gm.GetCheckpoint() != new Vector2(transform.position.x, transform.position.y)))
+        if (collision.gameObject.CompareTag("Player") && (gm.GetCheckpointNum() != this.checkpointNum))
         {
-            gm.SetCheckpoint(this.transform.position);
+            gm.SetCheckpoint(this.checkpointNum);
             ps.Play();
             anim.SetBool("check", true);
-            
         }
     }
 
-   
+
 }
 
