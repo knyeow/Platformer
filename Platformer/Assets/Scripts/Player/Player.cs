@@ -102,6 +102,8 @@ public class Player : MonoBehaviour
     }
     private void Update()
     {
+        if (gm.isPlayerStop()) return;
+
         if (Input.GetKeyDown(KeyCode.R))
             Die();
 
@@ -205,5 +207,7 @@ public class Player : MonoBehaviour
         footTr[1].Clear();
 
     }
+
+
 
 }
