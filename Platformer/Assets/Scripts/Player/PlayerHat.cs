@@ -34,14 +34,15 @@ public class PlayerHat : MonoBehaviour
         hatHat = hat.GetComponent<Hat>();
         mainCamera = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<Camera>();
         points = new GameObject[15];
+        Physics2D.IgnoreLayerCollision(8, 9);
     }
 
    
    private  void Update()
     {
-        Physics2D.IgnoreLayerCollision(8, 9);
+        
 
-        Vector2 rotation = mousePos - transform.position;
+        Vector2 rotation = mousePos - pointsPos.position;
         float rotZ = Mathf.Atan2(rotation.y, rotation.x) * Mathf.Rad2Deg;
 
 
@@ -67,15 +68,18 @@ public class PlayerHat : MonoBehaviour
                     {
                         points[i] = Instantiate(point, playerHatPos.position, Quaternion.identity, pointsPos);
                         points[i].transform.localPosition = new Vector2(i * 0.2f, 0f);
-                    currentPointNumber++;
+                        currentPointNumber++;
                     }
                 }
             
-            for (int i = 0;i < currentPointNumber-pointsNumber; i++)
-            {   
-                Destroy(points[currentPointNumber - i-1]);
+
+            while(currentPointNumber != pointsNumber)
+            {
+                Destroy(points[currentPointNumber-1]);
                 currentPointNumber--;
+
             }
+
             
         }
         if (Input.GetMouseButtonUp(0))              //throw hat
@@ -124,7 +128,7 @@ public class PlayerHat : MonoBehaviour
 
 
         mousePos = mainCamera.ScreenToWorldPoint(Input.mousePosition);
-        Vector2 rotation = mousePos - transform.position;
+        Vector2 rotation = mousePos - pointsPos.position;
         Vector2 signedRotation = new Vector2(Mathf.Sign(rotation.x), Mathf.Sign(rotation.y));
 
         limitedRotation = new Vector2(Mathf.Min(Mathf.Abs(rotation.x),10),Mathf.Min(Mathf.Abs(rotation.y),10));

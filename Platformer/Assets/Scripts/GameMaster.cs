@@ -89,6 +89,7 @@ public class GameMaster : MonoBehaviour
 
     private void OnApplicationQuit()
     {
+        if(finish != null)
         levelTimer += finish.levelTimer;
         SavePlayer();
     }
