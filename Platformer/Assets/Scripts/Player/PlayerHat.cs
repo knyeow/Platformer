@@ -117,7 +117,7 @@ public class PlayerHat : MonoBehaviour
     private void Teleport()
     {
         transform.position = hat.transform.position+new Vector3(0,+0.5f+0);
-        rb.velocity = Vector2.zero;
+        rb.velocity = hat.GetComponent<Rigidbody2D>().velocity;
         player.clearTrails();
     }
 
