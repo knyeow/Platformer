@@ -1,4 +1,4 @@
-using System.Collections;
+ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -15,16 +15,17 @@ public class Hat : MonoBehaviour
 
 
     private Rigidbody2D rb;
-    private BoxCollider2D bc;
+    [SerializeField]private BoxCollider2D bc;
     private Animator anim;
 
     public bool isThrow = false;
+
+    private bool isStuck;
 
 
     private void Start()
     {
         rb = GetComponent<Rigidbody2D>();
-        bc = GetComponent<BoxCollider2D>();
         anim = GetComponent<Animator>();
         rb.collisionDetectionMode = CollisionDetectionMode2D.Continuous;
     }
@@ -48,7 +49,13 @@ public class Hat : MonoBehaviour
 
     public void ThrowHat(Vector2 direction)
     {
-        rb.velocity = direction;
+        if (isStuck)
+        {
+            transform.position = new Vector2(transform.position.x, transform.position.y - 0.5f);
+            rb.velocity = new Vector2(direction.x, 0);
+        }
+        else
+            rb.velocity = direction;
         OnAir();
         isThrow = true;
        
@@ -86,5 +93,14 @@ public class Hat : MonoBehaviour
         transform.position = playerHatPos.position;
     }
 
-
+    private void OnTriggerStay2D(Collider2D collision)
+    {
+        if(collision.gameObject.layer==7)
+        isStuck = true;
+    }
+    private void OnTriggerExit2D(Collider2D collision)
+    {
+        if (collision.gameObject.layer == 7)
+            isStuck = false;
+    }
 }
