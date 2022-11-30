@@ -42,6 +42,8 @@ public class Player : MonoBehaviour
     private bool isDashing = false;
 
 
+    private float carSpeed;
+
     [SerializeField] private TrailRenderer[] footTr;
 
 
@@ -103,18 +105,21 @@ public class Player : MonoBehaviour
     {
         if (gm.isPlayerStop()) return;
 
+      
+
+
         if (Input.GetKeyDown(KeyCode.R))
             Die();
 
         if (Input.GetKey(KeyCode.Space) && coyoteTimer > 0)
             Jump();
 
+
+
         if (IsGrounded())
             coyoteTimer = coyoteTime;
         else
             coyoteTimer -= Time.deltaTime;
-
-        
 
         anim.SetBool("fall", IsGrounded());
     }
@@ -140,9 +145,13 @@ public class Player : MonoBehaviour
     }
     private void Walk()
     {
+
         anim.SetBool("Walking", Mathf.Abs(horizontal) > 0.05f);
-        if(horizontal != 0)
-        rb.velocity = new Vector2(horizontal * moveSpeed, rb.velocity.y);
+
+
+        if (horizontal != 0)
+            rb.velocity = new Vector2(carSpeed + horizontal * moveSpeed, rb.velocity.y);
+
 
     }
     private void Jump()
@@ -207,6 +216,26 @@ public class Player : MonoBehaviour
 
     }
 
+    //private void OnCollisionStay2D(Collision2D collision)
+    //{
+    //    Rigidbody2D cr = collision.gameObject.GetComponent<Rigidbody2D>();
+    //    if (cr != null)
+    //    {
+    //        carSpeed = cr.velocity.x;
+    //    }
+    //    else if (collision.gameObject.GetComponentInParent<Rigidbody2D>() != null)
+    //        carSpeed = collision.gameObject.GetComponentInParent<Rigidbody2D>().velocity.x;
+    //}
+    //private void OnCollisionExit2D(Collision2D collision)
+    //{
+    //    Rigidbody2D cr = collision.gameObject.GetComponent<Rigidbody2D>();
+    //    if (cr != null)
+    //    {
+    //        carSpeed = 0;
+    //    }
+    //    else if (collision.gameObject.GetComponentInParent<Rigidbody2D>() != null)
+    //        carSpeed = 0;
 
+    //}
 
 }
