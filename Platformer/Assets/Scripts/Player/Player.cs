@@ -112,7 +112,7 @@ public class Player : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.R))
             Die();
 
-        if (Input.GetKey(KeyCode.Space) && coyoteTimer > 0)
+        if (Input.GetButton("Jump") && coyoteTimer > 0)
             Jump();
 
 

@@ -42,16 +42,17 @@ public class PlayerHat : MonoBehaviour
     {
         
 
-        Vector2 rotation = mousePos - pointsPos.position;
-        float rotZ = Mathf.Atan2(rotation.y, rotation.x) * Mathf.Rad2Deg;
+       
 
 
         if (gm.isPlayerStop()) return;
 
-
+        mousePos = mainCamera.ScreenToWorldPoint(Input.mousePosition);
 
         if (Input.GetMouseButton(0) && !hatHat.isThrow)            //hat aim
         {
+            Vector2 rotation = mousePos - pointsPos.position;
+            float rotZ = Mathf.Atan2(rotation.y, rotation.x) * Mathf.Rad2Deg;
             pointsPos.transform.rotation = Quaternion.Euler(0, 0, rotZ);
             int pointsNumber = Mathf.Min((Mathf.Abs((int)ThrowPower().x) + Mathf.Abs((int)ThrowPower().y)),15);
 
@@ -127,7 +128,7 @@ public class PlayerHat : MonoBehaviour
         Vector2 throwPower,limitedRotation;
 
 
-        mousePos = mainCamera.ScreenToWorldPoint(Input.mousePosition);
+        
         Vector2 rotation = mousePos - pointsPos.position;
         Vector2 signedRotation = new Vector2(Mathf.Sign(rotation.x), Mathf.Sign(rotation.y));
 
