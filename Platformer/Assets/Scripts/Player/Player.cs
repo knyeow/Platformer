@@ -43,6 +43,7 @@ public class Player : MonoBehaviour
 
 
     private float carSpeed;
+    private float outboardSpeed;
 
     [SerializeField] private TrailRenderer[] footTr;
 
@@ -148,9 +149,11 @@ public class Player : MonoBehaviour
 
         anim.SetBool("Walking", Mathf.Abs(horizontal) > 0.05f);
 
+        
+
 
         if (horizontal != 0)
-            rb.velocity = new Vector2(carSpeed + horizontal * moveSpeed, rb.velocity.y);
+            rb.velocity = new Vector2(horizontal * moveSpeed, rb.velocity.y);
 
 
     }
