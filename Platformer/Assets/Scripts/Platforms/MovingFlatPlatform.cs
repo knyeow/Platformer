@@ -17,7 +17,7 @@ public class MovingFlatPlatform : MovingPlatform
         platform = GetComponent<PlatformEffector2D>();
     }
 
-    protected override void Update()
+    protected  override void Update()
     {
         base.Update();
         if (CheckPlayer() && !isFalling && Input.GetKey(KeyCode.S))

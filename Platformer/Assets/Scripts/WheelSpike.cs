@@ -31,7 +31,7 @@ public class WheelSpike : MonoBehaviour
 
         StartCoroutine(Spin());
 
-        Debug.Log(rightWheel.transform.localRotation.z);
+        
         if (HasTouched())
         {
             transform.localScale = new Vector2(transform.localScale.x * -1, transform.localScale.y);

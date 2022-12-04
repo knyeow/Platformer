@@ -6,12 +6,12 @@ public class MovingPlatform : MonoBehaviour
 {
     [SerializeField] private LayerMask wallLayer;
 
-    private float speed;
+    protected float speed;
 
-    private int direction = 1;
+    protected int direction = 1;
 
-    private Rigidbody2D rb;
-    private BoxCollider2D bc;
+    protected Rigidbody2D rb;
+    protected BoxCollider2D bc;
 
     private bool oneTime=false;
     protected virtual void Update()
@@ -19,6 +19,7 @@ public class MovingPlatform : MonoBehaviour
         if (!oneTime)
         {
             rb = GetComponent<Rigidbody2D>();
+            bc = GetComponent<BoxCollider2D>();
             rb.velocity = new Vector2(speed*direction, 0);
             oneTime = true;
         }
@@ -32,7 +33,7 @@ public class MovingPlatform : MonoBehaviour
 
 
 
-    private bool IsTouchingWall()
+    protected bool IsTouchingWall()
     {
         RaycastHit2D check = Physics2D.Raycast(transform.position, new Vector2(direction, 0), 1f, wallLayer);
         return check;
