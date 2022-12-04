@@ -18,6 +18,7 @@ public class PlayerHat : MonoBehaviour
     private Rigidbody2D rb;
     private Hat hatHat;
 
+    
 
     [SerializeField] private Transform pointsPos;
     [SerializeField] private GameObject point;
@@ -26,6 +27,11 @@ public class PlayerHat : MonoBehaviour
 
     private GameMaster gm;
 
+    private Vector2 gamepadAxis;
+
+
+
+    public bool isGamepad;
     void Start()
     {
         player = GetComponent<Player>();
@@ -42,27 +48,34 @@ public class PlayerHat : MonoBehaviour
     {
         
 
-       
-
 
         if (gm.isPlayerStop()) return;
 
+
         mousePos = mainCamera.ScreenToWorldPoint(Input.mousePosition);
-
-        if (Input.GetMouseButton(0) && !hatHat.isThrow)            //hat aim
-        {
-            Vector2 rotation = mousePos - pointsPos.position;
-            float rotZ = Mathf.Atan2(rotation.y, rotation.x) * Mathf.Rad2Deg;
-            pointsPos.transform.rotation = Quaternion.Euler(0, 0, rotZ);
-            int pointsNumber = Mathf.Min((Mathf.Abs((int)ThrowPower().x) + Mathf.Abs((int)ThrowPower().y)),15);
+        gamepadAxis = new Vector2(Input.GetAxis("Gamepad X"), Input.GetAxis("Gamepad Y"));
 
 
-            if (Mathf.Sign(transform.localScale.x) < 0)
-                pointsPos.transform.localScale = new Vector2(-1, pointsPos.transform.localScale.y);
+
+        if (Input.GetButton("Fire1") && !hatHat.isThrow)            //hat aim
+            {
+                Vector2 rotation = mousePos - pointsPos.position;
+            float rotZ;
+            if (!isGamepad)
+                rotZ = Mathf.Atan2(rotation.y, rotation.x) * Mathf.Rad2Deg;
             else
-                pointsPos.transform.localScale = new Vector2(1, pointsPos.transform.localScale.y);
+                rotZ = Mathf.Atan2(gamepadAxis.y, gamepadAxis.x) * Mathf.Rad2Deg;
 
-            
+                pointsPos.transform.rotation = Quaternion.Euler(0, 0, rotZ);
+                int pointsNumber = Mathf.Min((Mathf.Abs((int)ThrowPower().x) + Mathf.Abs((int)ThrowPower().y)), 15);
+
+
+                if (Mathf.Sign(transform.localScale.x) < 0)
+                    pointsPos.transform.localScale = new Vector2(-1, pointsPos.transform.localScale.y);
+                else
+                    pointsPos.transform.localScale = new Vector2(1, pointsPos.transform.localScale.y);
+
+
                 for (int i = 0; i < pointsNumber; i++)
                 {
                     if (points[i] == null)
@@ -72,44 +85,46 @@ public class PlayerHat : MonoBehaviour
                         currentPointNumber++;
                     }
                 }
-            
 
-            while(currentPointNumber != pointsNumber)
+
+                while (currentPointNumber != pointsNumber)
+                {
+                    Destroy(points[currentPointNumber - 1]);
+                    currentPointNumber--;
+
+                }
+
+
+            }
+            if (Input.GetButtonUp("Fire1"))              //throw hat
             {
-                Destroy(points[currentPointNumber-1]);
-                currentPointNumber--;
+                if (!hatHat.isThrow)
+                    hatHat.ThrowHat(ThrowPower());
+
+                for (int i = 0; i < points.Length; i++)
+                {
+                    Destroy(points[i]);
+                }
+                currentPointNumber = 0;
 
             }
 
-            
-        }
-        if (Input.GetMouseButtonUp(0))              //throw hat
-        {
-            if (!hatHat.isThrow)
-                hatHat.ThrowHat(ThrowPower());
-
-            for (int i = 0; i < points.Length; i++)
+            if (Input.GetButton("Button 1") && hatHat.isThrow)   //take hat back
             {
-                Destroy(points[i]);
+                hatHat.TakeHatBack();
+
             }
-            currentPointNumber = 0;
-           
-        }
-        if (Input.GetKey(KeyCode.Q) && hatHat.isThrow)   //take hat back
-        {
-            hatHat.TakeHatBack();
-            
-        }
+
+
+
+            if (Input.GetButton("Button 2") && hatHat.Teleportable())       //teleport
+            {
+                Teleport();
+                hatHat.isThrow = false;
+                hatHat.TakeHatBack();
+            }
 
         
-
-        if (Input.GetKey(KeyCode.E) && hatHat.Teleportable())       //teleport
-        {
-            Teleport();
-            hatHat.isThrow = false;
-            hatHat.TakeHatBack();
-        }
-
       
         
 
@@ -128,12 +143,15 @@ public class PlayerHat : MonoBehaviour
         Vector2 throwPower,limitedRotation;
 
 
-        
         Vector2 rotation = mousePos - pointsPos.position;
         Vector2 signedRotation = new Vector2(Mathf.Sign(rotation.x), Mathf.Sign(rotation.y));
-
         limitedRotation = new Vector2(Mathf.Min(Mathf.Abs(rotation.x),10),Mathf.Min(Mathf.Abs(rotation.y),10));
+
+        if(!isGamepad)
         throwPower = limitedRotation * powerFactor*signedRotation;
+        else
+        throwPower = (new Vector2(Input.GetAxis("Gamepad X"), Input.GetAxis("Gamepad Y")))*powerFactor*10;
+        
 
         return throwPower;
 

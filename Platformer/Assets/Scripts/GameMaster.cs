@@ -24,16 +24,7 @@ public class GameMaster : MonoBehaviour
 
     void Awake()
     {
-
-
         LoadPlayer();
-
-        GameObject[] _checkpoints = GameObject.FindGameObjectsWithTag("Checkpoint");
-        checkPoints = new GameObject[_checkpoints.Length];
-        for (int i = 0; i < GameObject.FindGameObjectsWithTag("Checkpoint").Length; i++)
-        {
-            checkPoints[_checkpoints[i].GetComponent<CheckPoint>().checkpointNum] = _checkpoints[i];
-        }
     }
     private void Start()
     {

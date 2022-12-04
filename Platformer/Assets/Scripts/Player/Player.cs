@@ -42,9 +42,6 @@ public class Player : MonoBehaviour
     private bool isDashing = false;
 
 
-    private float carSpeed;
-    private float outboardSpeed;
-
     [SerializeField] private TrailRenderer[] footTr;
 
 
@@ -148,14 +145,8 @@ public class Player : MonoBehaviour
     {
 
         anim.SetBool("Walking", Mathf.Abs(horizontal) > 0.05f);
-
-        
-
-
-        if (horizontal != 0)
-            rb.velocity = new Vector2(horizontal * moveSpeed, rb.velocity.y);
-
-
+        if(horizontal != 0)
+        rb.velocity = new Vector2(horizontal * moveSpeed, rb.velocity.y);
     }
     private void Jump()
     {
@@ -219,26 +210,6 @@ public class Player : MonoBehaviour
 
     }
 
-    //private void OnCollisionStay2D(Collision2D collision)
-    //{
-    //    Rigidbody2D cr = collision.gameObject.GetComponent<Rigidbody2D>();
-    //    if (cr != null)
-    //    {
-    //        carSpeed = cr.velocity.x;
-    //    }
-    //    else if (collision.gameObject.GetComponentInParent<Rigidbody2D>() != null)
-    //        carSpeed = collision.gameObject.GetComponentInParent<Rigidbody2D>().velocity.x;
-    //}
-    //private void OnCollisionExit2D(Collision2D collision)
-    //{
-    //    Rigidbody2D cr = collision.gameObject.GetComponent<Rigidbody2D>();
-    //    if (cr != null)
-    //    {
-    //        carSpeed = 0;
-    //    }
-    //    else if (collision.gameObject.GetComponentInParent<Rigidbody2D>() != null)
-    //        carSpeed = 0;
 
-    //}
 
 }

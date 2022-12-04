@@ -686,7 +686,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7464708581704629467}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 7.84, y: 21.05, z: 0}
   m_LocalScale: {x: 2.5, y: 2.5, z: 2.5}
   m_Children:
@@ -840,7 +840,7 @@ MonoBehaviour:
   jumpForce: 15
   dashPower: 35
   dashTime: 0.15
-  dashCooldown: 1
+  dashCooldown: 0.5
   noFriction: {fileID: 6200000, guid: 4f10bf6a6fb568947be8408de9456484, type: 2}
   footTr:
   - {fileID: 7464708580905897599}
@@ -864,6 +864,7 @@ MonoBehaviour:
   powerFactor: 1.5
   pointsPos: {fileID: 7464708581126521370}
   point: {fileID: 3710569422148861054, guid: b04f86dae6078624dbdab50f47fbd667, type: 3}
+  isGamepad: 0
 --- !u!96 &7464708581704629443
 TrailRenderer:
   serializedVersion: 2
