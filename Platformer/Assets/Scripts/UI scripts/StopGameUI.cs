@@ -18,10 +18,7 @@ public class StopGameUI : MonoBehaviour
     }
     public void CloseUI()
     {
-        GameObject.FindGameObjectWithTag("GM").GetComponent<GameMaster>().onMenu = false;
-        Time.timeScale = 1;
-        controls.SetActive(false);
-        gameObject.SetActive(false);
+        StartCoroutine(CoCloseUI());
     }
     public void CloseApp()
     {
@@ -34,6 +31,15 @@ public class StopGameUI : MonoBehaviour
             controls.SetActive(false);
         else
             controls.SetActive(true);
+    }
+
+    IEnumerator CoCloseUI()
+    {
+        Time.timeScale = 1;
+        yield return new WaitForSeconds(0.1f);
+        GameObject.FindGameObjectWithTag("GM").GetComponent<GameMaster>().onMenu = false;
+        controls.SetActive(false);
+        gameObject.SetActive(false);
     }
 
 }

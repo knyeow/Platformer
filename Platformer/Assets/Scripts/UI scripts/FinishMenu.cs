@@ -22,7 +22,8 @@ public class FinishMenu : MonoBehaviour
             gm = GameObject.FindGameObjectWithTag("GM").GetComponent<GameMaster>();            
             time[1] = (int)gm.levelTimer / 60;
             time[0] = (int)time[1] / 60;
-            time[2] = (int)(gm.levelTimer - time[1] * 60);
+            time[1] -= time[0] * 60;
+            time[2] = (int)(gm.levelTimer - time[1] * 60 - time[0]*3600);
             levelTimer.text = (time[0] + "h" + time[1] + "m" + time[2] + "s");
             gm.level++;
             gm.lastCheckpointNum = 0;
