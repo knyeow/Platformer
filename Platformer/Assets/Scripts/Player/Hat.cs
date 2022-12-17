@@ -95,12 +95,12 @@ public class Hat : MonoBehaviour
 
     private void OnTriggerStay2D(Collider2D collision)
     {
-        if(collision.gameObject.layer==7)
+        if(collision.gameObject.layer==7 || collision.gameObject.layer == 6)
         isStuck = true;
     }
     private void OnTriggerExit2D(Collider2D collision)
     {
-        if (collision.gameObject.layer == 7)
+        if (collision.gameObject.layer == 7 || collision.gameObject.layer == 6)
             isStuck = false;
     }
 }

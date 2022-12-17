@@ -840,7 +840,7 @@ MonoBehaviour:
   jumpForce: 15
   dashPower: 35
   dashTime: 0.15
-  dashCooldown: 0.5
+  dashCooldown: 1
   noFriction: {fileID: 6200000, guid: 4f10bf6a6fb568947be8408de9456484, type: 2}
   footTr:
   - {fileID: 7464708580905897599}
